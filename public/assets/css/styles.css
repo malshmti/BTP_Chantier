@@ -1,0 +1,134 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+@font-face {
+    font-family: "Bauhaus 93";
+    src: url("/assets/typo/BAUHS93.TTF") format("ttf"),
+    url("/assets/typo/BAUHS93.TTF") format("ttf");
+}
+
+body{
+    font-family: 'Space Grotesk', sans-serif !important;
+}
+
+h1 {
+    margin-top: 3% !important;
+    margin-left: 10%;
+    color: #6c5353;
+    font-family: "Bauhaus 93", sans-serif;
+    width: 100%;
+}
+
+h2{
+    font-weight: 700 !important;
+    font-size: 1.8rem !important;
+    color: #8a916f;
+}
+
+hr{
+    border-top: 5px solid #6c5353 !important;
+}
+.dashBoardContain{
+    margin-top: 2%;
+    margin-bottom: 10%;
+}
+.navbar, .navbar-expand-lg .navbar-inner {
+    background: rgba(0,0,0,0);
+}
+
+.intro {
+    font-size: 1.5rem;
+    color: white;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 300;
+}
+
+video {
+    object-fit: cover;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.viewport {
+    position: relative;
+    z-index: 2;
+    font-family: 'Space Grotesk', sans-serif;
+}
+
+
+.navbar-light .navbar-nav .nav-link .nav-item{
+    color: white;
+    padding-right: 10px;
+}
+
+.active {
+    font-weight: 700;
+}
+
+.navbar-expand-lg .navbar-nav .nav-link{
+    margin-right: 0.5rem;
+    margin-left: 0.5rem;
+    padding-right: 1rem !important;
+    padding-left: 1rem !important;
+}
+
+.navbar-expand-lg .navbar-collapse{
+    justify-content: flex-end !important;
+}
+
+.navbar-expand-lg{
+    padding-left: 2% !important;
+}
+
+.signIn {
+    background-color: #8a916f !important;
+    border-color: rgba(0,0,0,0) !important;
+}
+
+.signUp {
+    background-color: #6c5353 !important;
+    border-color: rgba(0,0,0,0) !important;
+}
+
+.consult{
+    background-color: rgba(108, 83, 83, 0.55) !important;
+    border-color: rgba(0,0,0,0) !important;
+    transition: all 0.5s ease-in-out !important;
+
+}
+
+.consult:hover{
+    transform: scale(1.1);
+    background-color: rgba(138, 145, 111, 0.66) !important;
+}
+
+.discover {
+    background:  linear-gradient(#6c5353, #8a916f);
+    border-color: rgba(0,0,0,0) !important;
+}
+
+.dash {
+    background-color: #ffffff;
+}
+
+.card{
+    height: 700px;
+    padding: 1rem;
+    margin: 2%;
+    box-shadow: 10px 10px 50px rgba(138, 145, 111, 0.59);
+    border: none !important;
+    border-radius: 20px!important;
+}
+
+.card-img-top {
+    height: 200px;
+}
+
+.btn {
+    transition: all 0.5s ease-in-out !important;
+}
+
+.btn:hover{
+    transform: scale(1.1);
+}
