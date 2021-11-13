@@ -9,21 +9,26 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class NavController extends AbstractController
 {
-    #[Route('/btp', name: 'btp')]
+    /**
+    *@Route("/btp", name="btp")
+    */
     public function index():Response
     {
         return $this->render('btp/index.html.twig', [
             'controller_name' => 'NavController',
         ]);
     }
-
-    #[Route("/", name:"home")]
+    /**
+     * @Route("/", name="home")
+     */
     public function home(): Response
     {
         return $this->render('btp/home.html.twig');
     }
 
-    #[Route("/dash", name:"dashboard")]
+    /**
+    *@Route("/dash", name="dashboard")
+    */
     public function dashboard(): Response
     {
         $repo = $this->getDoctrine()->getRepository(Chantier::class);
@@ -36,7 +41,9 @@ class NavController extends AbstractController
     }
 
 
-    #[Route("/btp/{id}", name:"consult_chantier")]
+    /**
+     * @Route("/btp/{id}", name="consult_chantier")
+     */
     public function consult($id): Response
     {
         $repo = $this->getDoctrine()->getRepository(Chantier::class);
@@ -48,6 +55,22 @@ class NavController extends AbstractController
             'phases' => $chantier->getPhases(),
         ]);
     }
+
+    /**
+     * @Route("/btp/{id}/taches", name="consult_taches")
+     */
+    public function modal($id): Response
+    {
+        $repo = $this->getDoctrine()->getRepository(Chantier::class);
+
+        $chantier = $repo->find($id);
+
+        return $this->render('btp/modal_taches.html.twig',[
+            'chantier' => $chantier,
+            'phases' => $chantier->getPhases(),
+        ]);
+    }
+
 
 
 
