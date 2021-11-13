@@ -46,7 +46,7 @@ class Chantier
 
     public function __toString()
     {
-        return sprintf(' %s assuré à %s', $this->nom, $this->localisation);
+        return sprintf(' %s en construction au %s', $this->nom, $this->localisation);
     }
 
     public function getId(): ?int

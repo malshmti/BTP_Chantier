@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <h1>{{ chantier.nom }}</h1>
+        <p>{{ chantier.description }}</p>
+        <p>{{ chantier.localisation }}</p>
+        <h2>Phases du chantier</h2>
+        <div class="row">
+            {% for phase in phases %}
+                <div class="col-4">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item "><span class=" title_attr font-weight-bold">Nom : </span>{{ phase.nom }}</li>
+                        <li class="list-group-item "><span class=" font-weight-bold">Description : </span>{{ phase.description }}</li>
+                    </ul>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock body %}
