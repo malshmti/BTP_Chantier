@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass=TacheRepository::class)
  */
-class Tache
+class Tache implements \JsonSerializable
 {
     /**
      * @ORM\Id
@@ -51,6 +51,16 @@ class Tache
      * @ORM\OneToOne(targetEntity=ApprobationTache::class, mappedBy="tache", cascade={"persist", "remove"})
      */
     private $approbationTache;
+
+    public function jsonSerialize()
+    {
+        return [
+            'id' => $this->id,
+            'nom' => $this->nom,
+            'description' => $this->description,
+            'prestataire' => $this->prestataire
+        ];
+    }
 
     public function getId(): ?int
     {

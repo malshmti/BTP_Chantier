@@ -25,6 +25,7 @@ class TacheCrudController extends AbstractCrudController
                 ->setTimezone("Europe/Paris")
                 ->renderAsChoice(),
             AssociationField::new('phase'),
+            AssociationField::new('prestataire'),
         ];
     }
 

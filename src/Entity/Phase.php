@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass=PhaseRepository::class)
  */
-class Phase
+class Phase implements \JsonSerializable
 {
     /**
      * @ORM\Id
@@ -35,7 +35,7 @@ class Phase
     private $taches;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Chantier::class, inversedBy="phases")
+     * @ORM\ManyToOne(targetEntity=Chantier::class)
      */
     private $chantier;
 
@@ -47,6 +47,16 @@ class Phase
     public function __toString()
     {
         return sprintf('Phase %s du chantier : %s', $this->nom, $this->chantier);
+    }
+
+    public function jsonSerialize()
+    {
+        return [
+            'id' => $this->id,
+            'nom' => $this->nom,
+            'description' => $this->description,
+            'taches' => $this->taches
+        ];
     }
 
     public function getId(): ?int

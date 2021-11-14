@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass=ChantierRepository::class)
  */
-class Chantier
+class Chantier implements \JsonSerializable
 {
     /**
      * @ORM\Id
@@ -47,6 +47,17 @@ class Chantier
     public function __toString()
     {
         return sprintf(' %s en construction au %s', $this->nom, $this->localisation);
+    }
+
+    public function jsonSerialize()
+    {
+        return [
+            'id' => $this->id,
+            'nom' => $this->nom,
+            'description' => $this->description,
+            'localisation' => $this->localisation,
+            'phases' => $this->phases->toArray(),
+        ];
     }
 
     public function getId(): ?int
