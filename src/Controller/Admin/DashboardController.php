@@ -30,11 +30,14 @@ class DashboardController extends AbstractDashboardController
 
     public function configureMenuItems(): iterable
     {
+        yield MenuItem::linkToCrud('Prestataire', 'fas fa-star', Prestataire::class);
         yield MenuItem::linktoDashboard('Dashboard', 'fa fa-home');
+        // if($this->isGranted("ROLE_CONDUCTEURTRAVAUX")) {
+            yield MenuItem::linkToCrud('Prestataire', 'fas fa-star', Prestataire::class);
+        // }
         yield MenuItem::linkToCrud('Chantier', 'fas fa-star', Chantier::class);
         yield MenuItem::linkToCrud('Phase', 'fas fa-star', Phase::class);
         yield MenuItem::linkToCrud('Tache', 'fas fa-star', Tache::class);
-        yield MenuItem::linkToCrud('Prestataire', 'fas fa-star', Prestataire::class);
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
     }
 }
