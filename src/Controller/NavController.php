@@ -47,6 +47,14 @@ class NavController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/prestataire", name="prestataire")
+     */
+    public function prestataire(): Response
+    {
+        return $this->render('/btp/prestataire/prestataire.html.twig');
+    }
+
 
     /**
      * @Route("/btp/{id}", name="consult_chantier")
