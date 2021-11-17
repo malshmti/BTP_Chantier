@@ -39,7 +39,7 @@ class NavController extends AbstractController
 
         $chantiers = $repo->findAll();
 
-        $prestataires = $repo->findAll();
+        $prestataires = $repoPresta->findAll();
 
         return $this->render('btp/dashboard.html.twig',[
             'chantiers' => $chantiers,
