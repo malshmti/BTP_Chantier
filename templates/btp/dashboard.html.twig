@@ -28,12 +28,43 @@
                         </div>
 
                     </div>
-
                 </div>
                 {% endfor %}
 
             </div>
-
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">First</th>
+                    <th scope="col">Last</th>
+                    <th scope="col">Handle</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for prestataire in prestataires %}
+                <tr>
+                    <th scope="row">{{ prestataire.id }}</th>
+                    <td>{{ prestataire.nom }}</td>
+                    <td>{{ prestataire.email }}</td>
+                    <td>{{ prestataire.telephone }}o</td>
+                    <td>{{ prestataire.taches }}o</td>
+                </tr>
+                {% endfor %}
+                <tr>
+                    <th scope="row">2</th>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>Larry</td>
+                    <td>the Bird</td>
+                    <td>@twitter</td>
+                </tr>
+                </tbody>
+            </table>
         </div>
 
     </div>

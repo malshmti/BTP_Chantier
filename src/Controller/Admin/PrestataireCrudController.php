@@ -20,7 +20,7 @@ class PrestataireCrudController extends AbstractCrudController
         return [
            'nom',
            EmailField::new('email'),
-           NumberField::new('telephone'),
+           'telephone'
         ];
     }
 

@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Controller\Admin\PrestataireCrudController;
 use App\Entity\Chantier;
+use App\Entity\Prestataire;
 use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -33,11 +35,15 @@ class NavController extends AbstractController
     public function dashboard(): Response
     {
         $repo = $this->getDoctrine()->getRepository(Chantier::class);
+        $repoPresta = $this->getDoctrine()->getRepository(Prestataire::class);
 
         $chantiers = $repo->findAll();
 
+        $prestataires = $repo->findAll();
+
         return $this->render('btp/dashboard.html.twig',[
-        'chantiers' => $chantiers,
+            'chantiers' => $chantiers,
+            'prestataires' => $prestataires,
         ]);
     }
 
@@ -58,17 +64,16 @@ class NavController extends AbstractController
     }
 
     /**
-     * @Route("/btp/{id}/taches", name="consult_taches")
+     * @Route("/planning", name="planning_chantier")
      */
-    public function modal($id): Response
+    public function gantt(): Response
     {
         $repo = $this->getDoctrine()->getRepository(Chantier::class);
 
-        $chantier = $repo->find($id);
+        $chantiers = $repo->findAll();
 
-        return $this->render('btp/modal_taches.html.twig',[
-            'chantier' => $chantier,
-            'phases' => $chantier->getPhases(),
+        return $this->render('btp/planning.html.twig',[
+            'chantiers' => json_encode($chantiers),
         ]);
     }
 

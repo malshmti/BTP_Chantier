@@ -138,3 +138,14 @@ video {
     background-color: #6c5353 !important;
     border-color: rgba(0,0,0,0) !important;
 }
+
+.closeModal{
+    background-color: rgba(138, 145, 111, 0.66) !important;
+    border-color: rgba(0,0,0,0) !important;
+
+}
+
+.modal-title {
+    color: #8a916f;
+
+}
