@@ -53,7 +53,8 @@
         "symfony/maker-bundle": "^1.34",
         "symfony/phpunit-bridge": "^5.3",
         "symfony/stopwatch": "5.3.*",
-        "symfony/web-profiler-bundle": "5.3.*"
+        "symfony/web-profiler-bundle": "5.3.*",
+        "symfony/web-server-bundle": "^4.4.27"
     },
     "config": {
         "optimize-autoloader": true,

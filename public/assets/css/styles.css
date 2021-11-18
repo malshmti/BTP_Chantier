@@ -152,136 +152,173 @@ video {
 }
 
 body {
-    background-color: blue
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-size: 0.88rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    text-align: left;
+    background-color: #6200EA
 }
 
-.notes {
-    border-top-left-radius: 42px
+i {
+    font-style: italic
 }
 
-.dot {
-    height: 6px;
-    width: 6px;
-    margin-left: 8px;
-    margin-right: 3px;
-    margin-top: 2px;
-    background-color: rgb(91, 92, 91);
-    border-radius: 50%;
-    display: inline-block
+.container {
+    margin-top: 100px
 }
 
-.review-text {
-    background: red;
-    color: #fff
+.card {
+    box-shadow: 0 0.46875rem 2.1875rem rgba(4, 9, 20, 0.03), 0 0.9375rem 1.40625rem rgba(4, 9, 20, 0.03), 0 0.25rem 0.53125rem rgba(4, 9, 20, 0.05), 0 0.125rem 0.1875rem rgba(4, 9, 20, 0.03);
+    border-width: 0;
+    transition: all .2s
 }
 
-.info {
-    color: #8c8b9a
+.card-header:first-child {
+    border-radius: calc(0.25rem - 1px) calc(0.25rem - 1px) 0 0
 }
 
-.dot-red {
-    background-color: red !important;
-    height: 6px;
-    width: 6px;
-    margin-left: 8px;
-    margin-right: 3px;
-    margin-top: 2px;
-    border-radius: 50%;
-    display: inline-block
+.card-header {
+    display: flex;
+    align-items: center;
+    border-bottom-width: 1px;
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-right: 0.625rem;
+    height: 3.5rem;
+    background-color: #fff
 }
 
-.overview {
-    color: red
+.widget-subheading {
+    color: #858a8e;
+    font-size: 10px
 }
 
-@keyframes click-wave {
-    0% {
-        height: 40px;
-        width: 40px;
-        opacity: 0.15;
-        position: relative
-    }
-
-    100% {
-        height: 200px;
-        width: 200px;
-        margin-left: -80px;
-        margin-top: -80px;
-        opacity: 0
-    }
+.card-header.card-header-tab .card-header-title {
+    display: flex;
+    align-items: center;
+    white-space: nowrap
 }
 
-.option-input {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    -ms-appearance: none;
-    -o-appearance: none;
-    appearance: none;
+.card-header .header-icon {
+    font-size: 1.65rem;
+    margin-right: 0.625rem
+}
+
+.card-header.card-header-tab .card-header-title {
+    display: flex;
+    align-items: center;
+    white-space: nowrap
+}
+
+.btn-actions-pane-right {
+    margin-left: auto;
+    white-space: nowrap
+}
+
+.text-capitalize {
+    text-transform: capitalize !important
+}
+
+.scroll-area-sm {
+    height: 288px;
+    overflow-x: hidden
+}
+
+.list-group-item {
     position: relative;
-    top: 10.3px;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    height: 30px;
-    width: 30px;
-    transition: all 0.15s ease-out 0s;
-    background: #cbd1d8;
-    border: none;
-    color: #fff;
-    cursor: pointer;
-    display: inline-block;
-    margin-right: 0.5rem;
-    outline: none;
-    position: relative;
-    z-index: 1000
+    display: block;
+    padding: 0.75rem 1.25rem;
+    margin-bottom: -1px;
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.125)
 }
 
-.option-input:hover {
-    background: #9faab7
+.list-group {
+    display: flex;
+    flex-direction: column;
+    padding-left: 0;
+    margin-bottom: 0
 }
 
-.option-input:checked {
-    background: #6B5253
-}
-
-.checkicon {
-    opacity: 0;
+.todo-indicator {
     position: absolute;
-    text-align: center;
-    
-}
-    
-.option-input:checked > .checkicon {
-    opacity: 1;
-}
-
-.option-input.radio {
-    border-radius: 50%
+    width: 4px;
+    height: 60%;
+    border-radius: 0.3rem;
+    left: 0.625rem;
+    top: 20%;
+    opacity: .6;
+    transition: opacity .2s
 }
 
-.option-input.radio::after {
-    border-radius: 50%
+.bg-warning {
+    background-color: #f7b924 !important
 }
 
-.completed {
-    color: gray;
-    text-decoration: line-through
+.widget-content {
+    padding: 1rem;
+    flex-direction: row;
+    align-items: center
 }
 
-.line-text {
-    width: 100%;
-    text-align: center;
-    border-bottom: 1px solid #eee;
-    line-height: 0.1em;
-    margin: 10px 0 20px
+.widget-content .widget-content-wrapper {
+    display: flex;
+    flex: 1;
+    position: relative;
+    align-items: center
 }
 
-.line-text span {
-    background: #fff;
-    padding: 0 10px;
-    color: #212529
+.widget-content .widget-content-right.widget-content-actions {
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity .2s
 }
 
-.user-images img {
-    margin-left: -5px
+.widget-content .widget-content-right {
+    margin-left: auto
+}
+
+.btn:not(:disabled):not(.disabled) {
+    cursor: pointer
+}
+
+.btn {
+    position: relative;
+    transition: color 0.15s, background-color 0.15s, border-color 0.15s, box-shadow 0.15s
+}
+
+.btn-outline-success {
+    color: #3ac47d;
+    border-color: #3ac47d
+}
+
+.btn-outline-success:hover {
+    color: #fff;
+    background-color: #3ac47d;
+    border-color: #3ac47d
+}
+
+.btn-outline-success:hover {
+    color: #fff;
+    background-color: #3ac47d;
+    border-color: #3ac47d
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #3f6ad8;
+    border-color: #3f6ad8
+}
+
+.btn {
+    position: relative;
+    transition: color 0.15s, background-color 0.15s, border-color 0.15s, box-shadow 0.15s;
+    outline: none !important
+}
+
+.card-footer {
+    background-color: #fff
 }
