@@ -1,82 +1,81 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<div class="dash">
-
-        <div class="container dashBoardContain">
-            <center>
-            <h1>Tableau de bord : Prestaire</h1>
-            </center>
-            <hr>
-        <div class="d-flex justify-content-left row">
+<div class="container PrestataireContain">
+<center><h1>Tableau de bord : Prestaire</h1></center>
+<hr>
+    <div class="d-flex justify-content-left row">
         <div class="col-md-6">
-        <div class="card-hover-shadow-2x mb-3 card">
-            <div class="card-header-tab card-header">
-                <div class="card-header-title font-size-lg text-capitalize font-weight-normal"><i class="fa fa-tasks"></i>&nbsp;Liste des taches assignées</div>
-            </div>
-            <div class="scroll-area-sm">
-                <perfect-scrollbar class="ps-show-limits">
-                    <div style="position: static;" class="ps ps--active-y">
-                        <div class="ps-content">
-                            <ul class=" list-group list-group-flush">
-
-                            <li class="list-group-item">
-                                    <div class="todo-indicator bg-info"></div>
-                                    <div class="widget-content p-0">
-                                        <div class="widget-content-wrapper">
-                                            <div class="widget-content-left mr-2">
-                                                <div class="custom-checkbox custom-control"><input class="custom-control-input" id="exampleCustomCheckbox2" type="checkbox"><label class="custom-control-label" for="exampleCustomCheckbox2">&nbsp;</label></div>
+            <div class="card-hover-shadow-2x mb-3 card">
+                <div class="card-header-tab card-header">
+                    <div class="card-header-title font-size-lg text-capitalize font-weight-normal"><i class="fa fa-tasks"></i>&nbsp;Liste des taches assignées</div>
+                </div>
+                <div class="scroll-area-sm">
+                    <perfect-scrollbar class="ps-show-limits">
+                        <div style="position: static;" class="ps ps--active-y">
+                            <div class="ps-content">
+                                <ul class=" list-group list-group-flush">
+                                    
+                                    <li class="list-group-item">
+                                        <div class="widget-content p-0">
+                                            <div class="widget-content-wrapper">
+                                                <div class="widget-content-left mr-2">
+                                                    <div class="custom-checkbox custom-control"><input class="custom-control-input" id="exampleCustomCheckbox4" type="checkbox"><label class="custom-control-label" for="exampleCustomCheckbox4">&nbsp;</label></div>
+                                                </div>
+                                                <div class="widget-content-left flex2">
+                                                    <div class="widget-heading">Rénovation maison individuelle </div>
+                                                    <div class="widget-subheading">Par Malsor</div>
+                                                </div>
                                             </div>
-                                            <div class="widget-content-left">
-                                                <div class="widget-heading">Office grocery shopping</div>
-                                                <div class="widget-subheading">By Tida</div>
-                                            </div>
-                                            <div class="widget-content-right"> <button class="border-0 btn-transition btn btn-outline-success"> <i class="fa fa-check"></i></button> <button class="border-0 btn-transition btn btn-outline-danger"> <i class="fa fa-trash"></i> </button> </div>
                                         </div>
-                                    </div>
-                                </li>
-                            
-                            </ul>
+                                    </li>
+                                    
+                                </ul>
+                            </div>
                         </div>
-                    </div>
-                </perfect-scrollbar>
+                    </perfect-scrollbar>
+                </div>
+                <div class="d-block text-right card-footer">
+                    <button type="button" class="btn btn-default">Annuler</button>
+                    <button class="btn btn-primary">Valider</button>
+                </div>
             </div>
         </div>
-    </div>
 
         <div class="col-md-6">
-        <div class="card-hover-shadow-2x mb-3 card">
-            <div class="card-header-tab card-header">
-                <div class="card-header-title font-size-lg text-capitalize font-weight-normal"><i class="fa fa-tasks"></i>&nbsp;Liste des taches à approuver</div>
-            </div>
-            <div class="scroll-area-sm">
-                <perfect-scrollbar class="ps-show-limits">
-                    <div style="position: static;" class="ps ps--active-y">
-                        <div class="ps-content">
-                            <ul class=" list-group list-group-flush">
-
-                                 <li class="list-group-item">
-                                    <div class="todo-indicator bg-primary"></div>
-                                    <div class="widget-content p-0">
-                                        <div class="widget-content-wrapper">
-                                            <div class="widget-content-left mr-2">
-                                                <div class="custom-checkbox custom-control"><input class="custom-control-input" id="exampleCustomCheckbox4" type="checkbox"><label class="custom-control-label" for="exampleCustomCheckbox4">&nbsp;</label></div>
-                                            </div>
+            <div class="card-hover-shadow-2x mb-3 card">
+                <div class="card-header-tab card-header">
+                    <div class="card-header-title font-size-lg text-capitalize font-weight-normal"><i class="fa fa-tasks"></i>&nbsp;Liste des taches à approuver</div>
+                </div>
+                <div class="scroll-area-sm">
+                    <perfect-scrollbar class="ps-show-limits">
+                        <div style="position: static;" class="ps ps--active-y">
+                            <div class="ps-content">
+                                <ul class=" list-group list-group-flush">
+                                    
+                                    <li class="list-group-item">
+                                        <div class="widget-content p-0">
+                                            <div class="widget-content-wrapper">
                                             <div class="widget-content-left flex2">
-                                                <div class="widget-heading">Office rent </div>
-                                                <div class="widget-subheading">By Samino!</div>
+                                                <div class="widget-heading">Construction ferme d'Ayoub </div>
+                                                <div class="widget-subheading">By Ayoub</div>
                                             </div>
-                                            <div class="widget-content-right"> <button class="border-0 btn-transition btn btn-outline-success"> <i class="fa fa-check"></i></button> <button class="border-0 btn-transition btn btn-outline-danger"> <i class="fa fa-trash"></i> </button> </div>
+                                            <div class="widget-content-right"> 
+                                            <button type="button" class="btn btn-success">Accepter</button> 
+                                            <button type="button" class="btn btn-danger">Refuser</button>
+                                            </div>
                                         </div>
-                                    </div>
-                                </li>
-                            
-                            </ul>
+                                        </div>
+                                    </li>
+                                    
+                                </ul>
+                            </div>
                         </div>
-                    </div>
-                </perfect-scrollbar>
+                    </perfect-scrollbar>
+                </div>
             </div>
         </div>
-    </div>
+
+    </div>    
 </div>
 {% endblock body %}
