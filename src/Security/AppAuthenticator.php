@@ -2,6 +2,7 @@
 
 namespace App\Security;
 
+use App\Entity\User;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -46,13 +47,27 @@ class AppAuthenticator extends AbstractLoginFormAuthenticator
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
-        if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
-            return new RedirectResponse($targetPath);
+        $user = $token->getUser();
+        switch($user->getTypeActeur()) {
+            case "Prestataire":
+                return new RedirectResponse($this->urlGenerator->generate('dash'));
+            case "Maitre d'ouvrage":
+                return new RedirectResponse($this->urlGenerator->generate('dash'));
+            case "Conducteur de travaux":
+                return new RedirectResponse($this->urlGenerator->generate('dash'));
+            case "Administrateur":
+                return new RedirectResponse($this->urlGenerator->generate('approval_account'));
+            default:
+                return new RedirectResponse($this->urlGenerator->generate('/'));
         }
+
+        /*if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
+            return new RedirectResponse($targetPath);
+        }*/
 
         // For example:
         //return new RedirectResponse($this->urlGenerator->generate('some_route'));
-        throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
+        //throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
     }
 
     protected function getLoginUrl(Request $request): string

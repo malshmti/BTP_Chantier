@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Chantier;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 
@@ -11,6 +12,13 @@ class ChantierCrudController extends AbstractCrudController
     public static function getEntityFqcn(): string
     {
         return Chantier::class;
+    }
+
+    public function configureCrud(Crud $crud): Crud
+    {
+        return $crud
+            ->overrideTemplate('crud/new', 'crudnewcustom.html.twig')
+            ;
     }
 
     public function configureFields(string $pageName): iterable

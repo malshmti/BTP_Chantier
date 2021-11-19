@@ -3,9 +3,23 @@
 
 {% block body %}
     <div>
-        {% for user in users %}
-            {{ user.email }}
-            <br/>
-        {% endfor %}
+        {% if users %}
+            Bonjour voici la liste des utilisateurs en attente de confirmation : <br/>
+
+            {% for user in users %}
+                Email : {{ user.email }}
+                Type acteur : {{ user.typeActeur }}
+                <a href="{{ path('approval_account_id', {'id': user.id}) }}">
+                    Valider
+                </a>
+                <br/>
+
+            {% endfor %}
+
+        {% else %}
+            Aucun utilisateur n'est en attente de confirmation
+        {% endif %}
+
+
     </div>
 {% endblock body %}

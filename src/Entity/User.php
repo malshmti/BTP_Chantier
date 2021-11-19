@@ -64,6 +64,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    /**
+     * @see UserInterface
+     */
     public function getTypeActeur(): ?string
     {
         return $this->typeActeur;

@@ -72,21 +72,6 @@ class NavController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/admin/approval", name="approval_account")
-     */
-    public function approvalAccount(): Response
-    {
-        $repo = $this->getDoctrine()->getRepository(User::class);
-
-        //$users =
-        $users = $repo->findBy(array('awaitingApproval' => true));
-
-        return $this->render('btp/approval_account.html.twig',[
-            'users' => $users
-        ]);
-    }
-
 
 
 
