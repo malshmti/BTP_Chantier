@@ -1,6 +1,9 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Tableau de bord CDT{% endblock %}
+
 {% block body %}
+
     <div class="dash">
 
         <div class="container dashBoardContain">
@@ -32,33 +35,36 @@
                 {% endfor %}
 
             </div>
-            <table class="table">
-                <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
-                    <th scope="col">Handle</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for prestataire in prestataires %}
-
-                {% endfor %}
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>@twitter</td>
-                </tr>
-                </tbody>
-            </table>
+            <div class="presta">
+                <h2>Prestataires</h2>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col">Nom</th>
+                        <th scope="col">E-mail</th>
+                        <th scope="col">Téléphone</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for prestataire in prestataires %}
+                    <tr>
+                        <th scope="row">{{ prestataire.id }}</th>
+                        <td>{{ prestataire.nom }}</td>
+                        <td>{{ prestataire.email }}</td>
+                        <td>{{ prestataire.telephone }}</td>
+                        <td>
+                            <a href="{{ path('consult_prestataire', {'id': prestataire.id} ) }}" class="card-link">
+                                <button type="button" class="btn btn-light text-white nav-item nav-link consult_presta">
+                                    Voir plus
+                                </button>
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         </div>
 
     </div>

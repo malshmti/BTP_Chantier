@@ -50,11 +50,11 @@ class AppAuthenticator extends AbstractLoginFormAuthenticator
         $user = $token->getUser();
         switch($user->getTypeActeur()) {
             case "Prestataire":
-                return new RedirectResponse($this->urlGenerator->generate('dash'));
+                return new RedirectResponse($this->urlGenerator->generate('dashboard_prestataire'));
             case "Maitre d'ouvrage":
-                return new RedirectResponse($this->urlGenerator->generate('dash'));
+                return new RedirectResponse($this->urlGenerator->generate('dashboard_prestataire'));
             case "Conducteur de travaux":
-                return new RedirectResponse($this->urlGenerator->generate('dash'));
+                return new RedirectResponse($this->urlGenerator->generate('dashboard_conducteur'));
             case "Administrateur":
                 return new RedirectResponse($this->urlGenerator->generate('approval_account'));
             default:

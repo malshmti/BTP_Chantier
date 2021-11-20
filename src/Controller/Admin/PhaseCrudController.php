@@ -3,8 +3,10 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Phase;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+
 
 class PhaseCrudController extends AbstractCrudController
 {
@@ -13,6 +15,12 @@ class PhaseCrudController extends AbstractCrudController
         return Phase::class;
     }
 
+    public function configureCrud(Crud $crud): Crud
+    {
+        return $crud
+            ->overrideTemplate('crud/new', 'crudnewcustom.html.twig')
+            ;
+    }
     public function configureFields(string $pageName): iterable
     {
         return [

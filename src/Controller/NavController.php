@@ -30,58 +30,90 @@ class NavController extends AbstractController
     }
 
     /**
-    *@Route("/dash", name="dashboard")
+    *@Route("/cdt/dash", name="dashboard_conducteur")
     */
-    public function dashboard(): Response
+    public function dashboardCdt(): Response
     {
+        $repo = $this->getDoctrine()->getRepository(User::class);
+
         $repo = $this->getDoctrine()->getRepository(Chantier::class);
         $repoPresta = $this->getDoctrine()->getRepository(Prestataire::class);
 
-        $chantiers = $repo->findAll();
 
+//        /** @var User|null $user */
+//        $user = $repo->findOneBy([
+//            'email' => $this->getUser()->getUserIdentifier()
+//        ]);
+//
+//        $chantiers = $user->getChantier;
+
+
+        $chantiers = $repo->findAll();
         $prestataires = $repoPresta->findAll();
 
-        return $this->render('btp/dashboard.html.twig',[
+        return $this->render('btp/cdt/dashboard_cdt.html.twig',[
             'chantiers' => $chantiers,
             'prestataires' => $prestataires,
         ]);
     }
 
     /**
-     * @Route("/prestataire", name="prestataire")
+     * @Route("/presta/dash", name="dashboard_prestataire")
      */
-    public function prestataire(): Response
+    public function dashboardPresta(): Response
     {
-        return $this->render('/btp/prestataire/prestataire.html.twig');
+        return $this->render('btp/presta/dashboard_presta.html.twig');
     }
 
 
     /**
-     * @Route("/btp/{id}", name="consult_chantier")
+     * @Route("/cdt/dash/chantier/{id}", name="consult_chantier")
      */
-    public function consult($id): Response
+    public function consultChantier($id): Response
     {
         $repo = $this->getDoctrine()->getRepository(Chantier::class);
 
         $chantier = $repo->find($id);
 
-        return $this->render('btp/consult_chantier.html.twig',[
+        return $this->render('btp/cdt/consult_chantier.html.twig',[
             'chantier' => $chantier,
             'phases' => $chantier->getPhases(),
         ]);
     }
 
     /**
-     * @Route("/planning", name="planning_chantier")
+     * @Route("/crea_chantier", name="add_chantier")
      */
-    public function gantt(): Response
+    public function addChantier(): Response
     {
-        $repo = $this->getDoctrine()->getRepository(Chantier::class);
+        return $this->render('btp/add_chantier.html.twig');
 
-        $chantiers = $repo->findAll();
+    }
+//    /**
+//     * @Route("/planning", name="planning_chantier")
+//     */
+//    public function gantt(): Response
+//    {
+//        $repo = $this->getDoctrine()->getRepository(Chantier::class);
+//
+//        $chantiers = $repo->findAll();
+//
+//        return $this->render('btp/planning.html.twig',[
+//            'chantiers' => json_encode($chantiers),
+//        ]);
+//    }
 
-        return $this->render('btp/planning.html.twig',[
-            'chantiers' => json_encode($chantiers),
+    /**
+     * @Route("/cdt/dash/prestataire/{id}", name="consult_prestataire")
+     */
+    public function consultPrestataire($id): Response
+    {
+        $repo = $this->getDoctrine()->getRepository(Prestataire::class);
+
+        $prestataire = $repo->find($id);
+
+        return $this->render('btp/cdt/consult_prestataire.html.twig',[
+            'prestataire' => $prestataire,
         ]);
     }
 

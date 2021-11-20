@@ -1,26 +1,56 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Accueil{% endblock %}
+
+{% block header %}
+<header class="viewport">
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand" href="{{ path('home') }}">
+            <img src="{{ asset('assets/img/logoBTPwhite.png') }}" alt="Logo">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <div class="navbar-nav">
+                    {% if is_granted("ROLE_MAITREOUVRAGE") %}
+                        <a class="nav-item nav-link text-white" href="{{ path('') }}">Votre tableau de bord<span class="sr-only">(current)</span></a>
+                        <a class="nav-item nav-link text-white" href="">Vos chantiers</a>
+                    {% endif %}
+                    {% if is_granted("ROLE_PRESTATAIRE>") %}
+                        <a class="nav-item nav-link text-white" href="{{ path('') }}">Votre tableau de bord<span class="sr-only">(current)</span></a>
+                        <a class="nav-item nav-link text-white" href="">Vos chantiers</a>
+                    {% endif %}
+                    {% if is_granted("ROLE_CONDUCTEURTRAVAUX") %}
+                        <a class="nav-item nav-link text-white" href="{{ path('dashboard_conducteur') }}">Votre tableau de bord<span class="sr-only">(current)</span></a>
+                        <a class="nav-item nav-link text-white" href="{{ urlCreaPhase }}">Créer une phase</a>
+                        <a class="nav-item nav-link text-white" href="{{ urlCreaTache }}">Créer une tâche</a>
+
+                    {% endif %}
+                    {% if app.user %}
+                        <a href="{{ path('app_logout') }}" class="">
+                            <button type="button" class="btn btn-light text-white nav-item nav-link logout">Déconnexion</button>
+                        </a>
+                    {% else %}
+                        <a class="nav-item nav-link text-white active" href="{{ path('home') }}">Accueil<span class="sr-only">(current)</span></a>
+                        <a class="text-decoration-none" href="{{ path('app_register') }}">
+                            <button type="button" class="btn btn-light text-white nav-item nav-link signUp">Inscription</button>
+                        </a>
+                        <a class="text-decoration-none" href="{{ path('app_login') }}">
+                            <button type="button" class="btn btn-light text-white nav-item nav-link signIn">Connexion</button>
+                        </a>
+                    {% endif %}
+            </div>
+        </div>
+    </nav>
+</header>
+{% endblock header %}
+
 {% block body %}
 
+
     <div class="wrapper">
-        <header class="viewport">
-            <nav class="navbar navbar-expand-lg navbar-light">
-                <a class="navbar-brand" href="{{ path('home') }}">
-                    <img src="{{ asset('assets/img/logoBTPwhite.png') }}" alt="Logo">
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                    <div class="navbar-nav">
-                        <a class="nav-item nav-link text-white active" href="#">Accueil<span class="sr-only">(current)</span></a>
-                        <a class="nav-item nav-link text-white" href="#">Nos services</a>
-                        <button type="button" class="btn btn-light text-white nav-item nav-link signUp">Inscription</button>
-                        <button type="button" class="btn btn-light text-white nav-item nav-link signIn">Connexion</button>
-                    </div>
-                </div>
-            </nav>
-        </header>
 
         <video playsinline autoplay muted loop poster="" id="bgvid">
             <source src="" type="video/webm">

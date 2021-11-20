@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <h1>{{ prestataire.nom }}</h1>
+        <p><span class="title_attr font-weight-bold">E-mail : </span>{{ prestataire.email }}</p>
+        <p><span class="title_attr font-weight-bold">Téléphone : </span>{{ prestataire.telephone }}</p>
+
+    </div>
+{% endblock body %}

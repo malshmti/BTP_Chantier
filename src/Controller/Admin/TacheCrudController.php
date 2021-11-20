@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Tache;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
@@ -14,6 +15,14 @@ class TacheCrudController extends AbstractCrudController
     {
         return Tache::class;
     }
+
+    public function configureCrud(Crud $crud): Crud
+    {
+        return $crud
+            ->overrideTemplate('crud/new', 'crudnewcustom.html.twig')
+            ;
+    }
+
 
     public function configureFields(string $pageName): iterable
     {
