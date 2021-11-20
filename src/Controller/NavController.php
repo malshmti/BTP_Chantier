@@ -55,6 +55,19 @@ class NavController extends AbstractController
         return $this->render('/btp/prestataire/prestataire.html.twig');
     }
 
+    /**
+     * @Route("/maitreouvrage", name="maitreouvrage")
+     */
+    public function maitreouvrage(): Response
+    {
+        $repo = $this->getDoctrine()->getRepository(Chantier::class);
+
+        $chantiers = $repo->findAll();
+         return $this->render('/btp/maitreouvrage/maitreouvrage.html.twig',[
+            'chantiers' => $chantiers,
+        ]);
+    }
+
 
     /**
      * @Route("/btp/{id}", name="consult_chantier")
