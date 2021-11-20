@@ -34,7 +34,7 @@
                                             <p><span class="font-weight-bold">Nom : </span>{{ tache.nom }}</p>
                                             <p><span class="font-weight-bold">Date de début : </span>{{ tache.dateDebut | date('d/m/Y') }}</p>
                                             <p><span class="font-weight-bold">Durée : </span>{{ tache.duree }}</p>
-                                            {% if tache.getPrestataire().nom != null %}
+                                            {% if tache.getPrestataire() != null %}
                                                 <p><span class="font-weight-bold">Prestataire assigné : </span>{{ tache.getPrestataire().nom }}</p>
                                             {% endif %}
                                             <hr>

@@ -48,23 +48,38 @@ class NavController extends AbstractController
     }
 
     /**
-     * @Route("/prestataire", name="prestataire")
+     * @Route("/prestataire/dash", name="prestataire")
      */
     public function prestataire(): Response
     {
-        return $this->render('/btp/prestataire/prestataire.html.twig');
+        return $this->render('/btp/prestataire/dash.html.twig');
     }
 
     /**
-     * @Route("/maitreouvrage", name="maitreouvrage")
+     * @Route("/maitreouvrage/dash", name="maitreouvrage")
      */
     public function maitreouvrage(): Response
     {
         $repo = $this->getDoctrine()->getRepository(Chantier::class);
 
         $chantiers = $repo->findAll();
-         return $this->render('/btp/maitreouvrage/maitreouvrage.html.twig',[
+         return $this->render('/btp/maitreouvrage/dash.html.twig',[
             'chantiers' => $chantiers,
+        ]);
+    }
+
+    /**
+     * @Route("/maitreouvrage/chantier/{id}", name="maitreouvrageconsult_chantier")
+     */
+    public function consultmaitreouvrage($id): Response
+    {
+        $repo = $this->getDoctrine()->getRepository(Chantier::class);
+
+        $chantier = $repo->find($id);
+
+        return $this->render('btp/maitreouvrage/consult_chantier.html.twig',[
+            'chantier' => $chantier,
+            'phases' => $chantier->getPhases(),
         ]);
     }
 
@@ -83,6 +98,7 @@ class NavController extends AbstractController
             'phases' => $chantier->getPhases(),
         ]);
     }
+
 
     /**
      * @Route("/planning", name="planning_chantier")

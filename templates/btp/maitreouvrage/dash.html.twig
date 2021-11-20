@@ -1,0 +1,114 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="dash">
+
+        <div class="container dashBoardContain">
+            <h1>Tableau de bord : Maitre d'ouvrage</h1>
+            <hr>
+            {% if chantiers == null %}
+            <h2>Vous n'avez pas de chantier</h2>
+            {% else %}
+            <h2>Chantiers</h2>   
+            <button type="button" class="btn btn-light text-white nav-item nav-link consult">
+            Commander un chantier
+            </button>
+            <br>
+            <div class="row justify-content-between ">
+                {% for chantier in chantiers %}
+                <div class="mb-3 col-4">
+                    <div class="carte">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ chantier.nom }}</h5>
+                            <p class="card-text">{{ chantier.description }}</p>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item "><span class="d-block font-weight-bold">Localisation</span>{{ chantier.localisation }}</li>
+                        </ul>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item "><span class="d-block font-weight-bold">Nom conducteur de travaux :</span></li>
+                        </ul>
+                        <div class="card-body">
+                                <a href="{{ path('maitreouvrage_consult_chantier', {'id': chantier.id} ) }}" class="card-link">
+                                    <button type="button" class="btn btn-light text-white nav-item nav-link consult">
+                                        Consulter le chantier
+                                    </button>
+                                </a>
+
+                        </div>
+
+                    </div>
+                </div>
+                {% endfor %}
+                {% endif %}
+
+    <div class="d-flex justify-content-left row">
+        <div class="col-md-6">
+            <div class="card-hover-shadow-2x mb-3 card">
+                <div class="card-header-tab card-header">
+                    <div class="card-header-title font-size-lg text-capitalize font-weight-normal"><i class="fa fa-tasks"></i>&nbsp;Liste des taches assignées</div>
+                </div>
+                <div class="scroll-area-sm">
+                    <perfect-scrollbar class="ps-show-limits">
+                        <div style="position: static;" class="ps ps--active-y">
+                            <div class="ps-content">
+                                <ul class=" list-group list-group-flush">
+                                    
+                                    <li class="list-group-item">
+                                        <div class="widget-content p-0">
+                                            <div class="widget-content-wrapper">
+                                                <div class="widget-content-left mr-2">
+                                                </div>
+                                                <div class="widget-content-left flex2">
+                                                    <div class="widget-heading">Rénovation maison individuelle </div>
+                                                    <div class="widget-subheading">Par Malsor</div>
+                                                </div>
+                                               
+                                            </div>
+                                        </div>
+                                    </li>
+                                    
+                                </ul>
+                            </div>
+                        </div>
+                    </perfect-scrollbar>
+                </div> 
+            </div>
+        </div>
+    </div>
+
+        <div class="col-md-6">
+            <div class="card-hover-shadow-2x mb-3 card">
+                <div class="card-header-tab card-header">
+                    <div class="card-header-title font-size-lg text-capitalize font-weight-normal"><i class="fa fa-tasks"></i>&nbsp;Liste des taches à approuver</div>
+                </div>
+                <div class="scroll-area-sm">
+                    <perfect-scrollbar class="ps-show-limits">
+                        <div style="position: static;" class="ps ps--active-y">
+                            <div class="ps-content">
+                                <ul class=" list-group list-group-flush">
+                                    
+                                    <li class="list-group-item">
+                                        <div class="widget-content p-0">
+                                            <div class="widget-content-wrapper">
+                                            <div class="widget-content-left flex2">
+                                                <div class="widget-heading">Construction ferme d'Ayoub </div>
+                                                <div class="widget-subheading">By Ayoub</div>
+                                            </div>
+                                           
+                                        </div>
+                                        </div>
+                                    </li>
+                                    
+                                </ul>
+                            </div>
+                        </div>
+                    </perfect-scrollbar>
+                </div>
+            </div>
+        </div>
+
+    </div>    
+</div>
+
+{% endblock body %}                
