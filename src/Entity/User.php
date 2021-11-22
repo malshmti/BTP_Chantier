@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -46,6 +48,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="boolean")
      */
     private $awaitingApproval;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Chantier::class, inversedBy="users")
+     */
+    private $chantiers;
+
+    public function __construct()
+    {
+        $this->chantiers = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -176,6 +188,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         if (!in_array($role, $this->roles, true)) {
             $this->roles[] = $role;
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Chantier[]
+     */
+    public function getChantiers(): Collection
+    {
+        return $this->chantiers;
+    }
+
+    public function addChantier(Chantier $chantier): self
+    {
+        if (!$this->chantiers->contains($chantier)) {
+            $this->chantiers[] = $chantier;
+        }
+
+        return $this;
+    }
+
+    public function removeChantier(Chantier $chantier): self
+    {
+        $this->chantiers->removeElement($chantier);
 
         return $this;
     }

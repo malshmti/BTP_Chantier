@@ -39,9 +39,15 @@ class Chantier implements \JsonSerializable
      */
     private $localisation;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=User::class, mappedBy="chantier")
+     */
+    private $users;
+
     public function __construct()
     {
         $this->phases = new ArrayCollection();
+        $this->users = new ArrayCollection();
     }
 
     public function __toString()
@@ -127,6 +133,33 @@ class Chantier implements \JsonSerializable
     public function setLocalisation(string $localisation): self
     {
         $this->localisation = $localisation;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(User $user): self
+    {
+        if (!$this->users->contains($user)) {
+            $this->users[] = $user;
+            $user->addChantier($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): self
+    {
+        if ($this->users->removeElement($user)) {
+            $user->removeChantier($this);
+        }
 
         return $this;
     }

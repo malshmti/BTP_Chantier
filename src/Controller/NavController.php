@@ -30,7 +30,7 @@ class NavController extends AbstractController
     }
 
     /**
-    *@Route("/cdt/dash", name="dashboard_conducteur")
+    *@Route("/cdt", name="dashboard_conducteur")
     */
     public function dashboardCdt(): Response
     {
@@ -58,7 +58,7 @@ class NavController extends AbstractController
     }
 
     /**
-     * @Route("/presta/dash", name="dashboard_prestataire")
+     * @Route("/presta", name="dashboard_prestataire")
      */
     public function dashboardPresta(): Response
     {
@@ -67,7 +67,7 @@ class NavController extends AbstractController
 
 
     /**
-     * @Route("/cdt/dash/chantier/{id}", name="consult_chantier")
+     * @Route("/cdt/chantier/{id}", name="consult_chantier")
      */
     public function consultChantier($id): Response
     {
@@ -104,7 +104,7 @@ class NavController extends AbstractController
 //    }
 
     /**
-     * @Route("/cdt/dash/prestataire/{id}", name="consult_prestataire")
+     * @Route("/cdt/prestataire/{id}", name="consult_prestataire")
      */
     public function consultPrestataire($id): Response
     {
@@ -117,7 +117,33 @@ class NavController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/maitreouvrage", name="maitreouvrage")
+     */
+    public function dashMo(): Response
+    {
+        $repo = $this->getDoctrine()->getRepository(Chantier::class);
 
+        $chantiers = $repo->findAll();
+        return $this->render('btp/maitreouvrage/dashboard_mo.html.twig',[
+            'chantiers' => $chantiers,
+        ]);
+    }
+
+    /**
+     * @Route("/maitreouvrage/chantier/{id}", name="maitreouvrage_consult_chantier")
+     */
+    public function consultMo($id): Response
+    {
+        $repo = $this->getDoctrine()->getRepository(Chantier::class);
+
+        $chantier = $repo->find($id);
+
+        return $this->render('btp/maitreouvrage/consult_chantier.html.twig',[
+            'chantier' => $chantier,
+            'phases' => $chantier->getPhases(),
+        ]);
+    }
 
 
 

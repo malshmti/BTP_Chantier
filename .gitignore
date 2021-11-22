@@ -18,6 +18,3 @@
 /phpunit.xml
 .phpunit.result.cache
 ###< phpunit/phpunit ###
-.env
-composer.json
-composer.lock
