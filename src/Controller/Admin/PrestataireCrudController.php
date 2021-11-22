@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Prestataire;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
@@ -22,6 +23,13 @@ class PrestataireCrudController extends AbstractCrudController
            EmailField::new('email'),
            'telephone'
         ];
+    }
+
+    public function configureCrud(Crud $crud): Crud
+    {
+        return $crud
+            ->overrideTemplate('crud/new', 'crudnewcustom.html.twig')
+            ;
     }
 
     protected function redirectToReferrer() {
