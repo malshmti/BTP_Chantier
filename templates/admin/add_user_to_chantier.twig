@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+    <div>
+        {% if users %}
+            Bonjour voici la liste de vos chantiers : <br/>
+
+            {% for user in users %}
+                Email : {{ user.email }}
+                Type acteur : {{ user.typeActeur }}
+                <a href="{{ path('approval_account_id', {'id': user.id}) }}">
+                    Valider
+                </a>
+                <br/>
+
+            {% endfor %}
+
+        {% else %}
+            Aucun utilisateur n'est en attente de confirmation
+        {% endif %}
+
+
+    </div>
+{% endblock body %}

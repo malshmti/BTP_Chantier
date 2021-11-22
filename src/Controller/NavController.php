@@ -69,7 +69,7 @@ class NavController extends AbstractController
     }
 
     /**
-     * @Route("/maitreouvrage/chantier/{id}", name="maitreouvrageconsult_chantier")
+     * @Route("/maitreouvrage/chantier/{id}", name="maitreouvrage_consult_chantier")
      */
     public function consultmaitreouvrage($id): Response
     {
