@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <h1>Créer une tâche</h1>
+        {% block new_form %}
+            {{ form_start(new_form) }}
+
+            {{ form_label(new_form.nom) }}
+            {{ form_widget(new_form.nom, {'attr': {'class': "form-control"}}) }}
+
+            {{ form_label(new_form.description) }}
+            {{ form_widget(new_form.description, {'attr': {'class':'form-control','style': ""}}) }}
+
+            {{ form_label(new_form.duree) }}
+            {{ form_widget(new_form.duree, {'attr': {'class':'form-control' ,'style': "width: 10%"}}) }}
+
+            {{ form_label(new_form.phase) }}
+            {{ form_widget(new_form.phase, {'attr': {'class':'form-control','style': "width: max-content", 'required': 'true'}}) }}
+
+            {{ form_label(new_form.dateDebut) }}
+            {{ form_widget(new_form.dateDebut, {'attr': {'class':'date','style': ""}}) }}
+
+            {{ form_label(new_form.prestataire) }}
+            {{ form_widget(new_form.prestataire, {'attr': {'class':'form-control','style': "width: max-content"}}) }}
+
+            {{ form_end(new_form) }}
+        {% endblock new_form %}
+        {% block page_actions %}
+            {% for action in entity.actions %}
+                {{ include(action.templatePath, { action: action }, with_context = false) }}
+            {% endfor %}
+        {% endblock %}
+    </div>
+{% endblock %}

@@ -33,14 +33,7 @@ class PrestataireCrudController extends AbstractCrudController
     }
 
     protected function redirectToReferrer() {
-        if ($this->request->query->get('action') == 'new'){
-            return $this->redirectToRoute(
-                'Phase',
-                ['id'=> PropertyAccess::createPropertyAccessor()->getValue($this->request->attributes->get('easyadmin')['item'], $this->entity['chantier'])
-                ]
-            );
-        }
+            return $this->redirectToRoute('approval_account');
 
-        return parent::redirectToReferrer();
     }
 }

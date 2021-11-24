@@ -2,9 +2,9 @@
 
 {% block body %}
     <div class="container">
-    {% block new_form %}
-        {{ form(new_form) }}
-    {% endblock new_form %}
+        {% block new_form %}
+            {{ form(new_form) }}
+        {% endblock new_form %}
         {% block page_actions %}
             {% for action in entity.actions %}
                 {{ include(action.templatePath, { action: action }, with_context = false) }}
@@ -12,3 +12,9 @@
         {% endblock %}
     </div>
 {% endblock %}
+
+
+{#    {{ form_start(new_form) }}#}
+{#    {{ form_widget(new_form.description, {'attr': {'style': "background-color: red"}}) }}#}
+
+{#    {{ form_end(new_form) }}#}

@@ -42,6 +42,7 @@ class Chantier implements \JsonSerializable
     /**
      * @ORM\ManyToMany(targetEntity=User::class, mappedBy="chantier")
      */
+
     private $users;
 
     public function __construct()

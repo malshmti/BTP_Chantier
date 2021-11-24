@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
 
+
 {% block body %}
     <div class="container">
         <h1>{{ chantier.nom }}</h1>
@@ -9,77 +10,38 @@
         <h2>Phases du chantier</h2>
         <div class="row">
             {% for phase in phases %}
+                {% set urlEditPhase = ea_url()
+                    .setController('App\\Controller\\Admin\\PhaseCrudController')
+                    .setAction('edit')
+                    .setEntityId(phase.id) %}
+
                 <div class="col-4">
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item "><span class=" title_attr font-weight-bold">Nom : </span>{{ phase.nom }}</li>
-                        <li class="list-group-item "><span class=" font-weight-bold">Description : </span>{{ phase.description }}</li>
+                        <li class="list-group-item "><span class=" title_attr font-weight-bold">Description : </span>{{ phase.description }}</li>
 
                         <div class="btn-group" role="group" aria-label="Basic example">
-                        <button type="button" onclick="showTaches" class="voirTaches btn btn-primary" data-toggle="modal" data-target="#exampleModalLong_{{loop.index}}">
-                            Voir les tâches
-                        </button>
-                        
-                        <button type="button" onclick="showTaches" class="voirTaches btn btn-primary" data-toggle="modal" data-target="#exampleModalLong_{{loop.index}}">
-                            Valider
-                        </button>
+                            <button type="button" class="voirTaches btn btn-primary" data-toggle="modal" data-target="#exampleModalLong_{{loop.index}}">
+                                Tâches en cours
+                            </button>
+                            <button type="button" class="voirTachesCours btn btn-primary" data-toggle="modal" data-target="#exampleModalLong_{{loop.index}}">
+                                Tâches terminées
+                            </button>
                         </div>
 
-                <br>        
-                <div class="card-hover-shadow-2x mb-3 card">
-                <div class="card-header-tab card-header">
-                <div class="card-header-title font-size-lg text-capitalize font-weight-normal"><i class="fa fa-tasks"></i>&nbsp;Taches terminées</div>
-                </div>
-                <div class="scroll-area-sm">
-                    <perfect-scrollbar class="ps-show-limits">
-                        <div style="position: static;" class="ps ps--active-y">
-                            <div class="ps-content">
-                                <ul class=" list-group list-group-flush">
-                                    
-                                    <li class="list-group-item">
-                                        <div class="widget-content p-0">
-                                            <div class="widget-content-wrapper">
-                                                <div class="widget-content-left mr-2">
-                                                </div>
-                                                <div class="widget-content-left flex2">
-                                                    <div class="widget-heading">Rénovation maison individuelle </div>
-                                                    <div class="widget-subheading">Par Malsor</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    
-                                </ul>
-                            </div>
+                        <div class="btn-group" role="group" aria-label="Basic example">
+
+
                         </div>
-                    </perfect-scrollbar>
-                </div>
-                 <div class="card-header-tab card-header">
-                <div class="card-header-title font-size-lg text-capitalize font-weight-normal"><i class="fa fa-tasks"></i>&nbsp;Taches à venir</div>
-                </div>
-                <div class="scroll-area-sm">
-                    <perfect-scrollbar class="ps-show-limits">
-                        <div style="position: static;" class="ps ps--active-y">
-                            <div class="ps-content">
-                                <ul class=" list-group list-group-flush">
-                                    
-                                    <li class="list-group-item">
-                                        <div class="widget-content p-0">
-                                            <div class="widget-content-wrapper">
-                                                <div class="widget-content-left mr-2">
-                                                </div>
-                                                <div class="widget-content-left flex2">
-                                                    <div class="widget-heading">Rénovation maison individuelle </div>
-                                                    <div class="widget-subheading">Par Malsor</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    
-                                </ul>
-                            </div>
+
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <button type="button" onclick="" class="validTask btn btn-primary" data-toggle="modal" data-target="#exampleModalLong_{{loop.index}}">
+                                Phase terminée
+                            </button>
                         </div>
-                    </perfect-scrollbar>
-                </div>
+
+
+
                         <!-- Modal -->
                         <div class="modal fade" id="exampleModalLong_{{loop.index}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
                             <div class="modal-dialog" role="document">
@@ -92,14 +54,18 @@
                                     </div>
                                     <div class="modal-body">
                                         {% for tache in phase.getTaches() %}
-                                            <p><span class="font-weight-bold">Nom : </span>{{ tache.nom }}</p>
-                                            <p><span class="font-weight-bold">Date de début : </span>{{ tache.dateDebut | date('d/m/Y') }}</p>
-                                            <p><span class="font-weight-bold">Durée : </span>{{ tache.duree }}</p>
-                                            <p><span class="font-weight-bold">Statut : </span>Terminé</p>
-                                            {% if tache.getPrestataire() != null %}
-                                                <p><span class="font-weight-bold">Prestataire assigné : </span>{{ tache.getPrestataire().nom }}</p>
+                                            {% if phase.getTaches() != null %}
+                                                <p><span class="font-weight-bold">Nom : </span>{{ tache.nom }}</p>
+                                                <p><span class="font-weight-bold">Date de début : </span>{{ tache.dateDebut | date('d/m/Y') }}</p>
+                                                <p><span class="font-weight-bold">Durée : </span>{{ tache.duree }}</p>
+                                                <p><span class="font-weight-bold">Statut : </span>Terminé</p>
+                                                {% if tache.getPrestataire() != null %}
+                                                    <p><span class="font-weight-bold">Prestataire assigné : </span>{{ tache.getPrestataire().nom }}</p>
+                                                {% endif %}
+                                                <hr>
+                                            {% else %}
+                                                <p>Pas de tâches dans la phase {{ phase.nom }} pour le moment. Pour plus d'informations, contactez le conducteur de travaux assigné</p>
                                             {% endif %}
-                                            <hr>
                                         {% endfor %}
                                     </div>
                                     <div class="modal-footer">
@@ -108,8 +74,6 @@
                                 </div>
                             </div>
                         </div>
-
-                </div>
                     </ul>
                 </div>
             {% endfor %}

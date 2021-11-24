@@ -3,9 +3,12 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Phase;
+use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
+use EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class PhaseCrudController extends AbstractCrudController
 {
@@ -16,18 +19,40 @@ class PhaseCrudController extends AbstractCrudController
 
     public function configureFields(string $pageName): iterable
     {
-        return [
-           'nom',
-           'description',
-            AssociationField::new('chantier'),
-        ];
+        $fields = ['nom', 'description'];
+        $repo = $this->getDoctrine()->getRepository(User::class);
+
+        /** @var User|null $user */
+        $user = $repo->findOneBy([
+            'email' => $this->getUser()->getUserIdentifier()
+        ]);
+        if ($user) {
+            $fields[] = AssociationField::new('chantier')->onlyOnForms()->setFormTypeOptions([
+                "choices" => $user->getChantiers()->toArray()
+            ]);
+        }
+
+        return $fields;
     }
 
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
             ->overrideTemplate('crud/new', 'crudnewcustom.html.twig')
-            ;
+            ->overrideTemplate('crud/edit', 'crudeditcustom.html.twig')
+
+        ;
+    }
+
+    protected function getRedirectResponseAfterSave(AdminContext $context, string $action): RedirectResponse
+    {
+        $repo = $this->getDoctrine()->getRepository(Phase::class);
+
+        /** @var Phase|null $phase */
+        $phase = $repo->find($context->getEntity()->getPrimaryKeyValue());
+        $chantier = $phase->getChantier();
+
+        return $this->redirectToRoute('consult_chantier', ['id' => $chantier->getId()]);
     }
 
     /*public function editSettingAction()

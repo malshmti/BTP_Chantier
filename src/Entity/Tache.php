@@ -44,6 +44,7 @@ class Tache implements \JsonSerializable
 
     /**
      * @ORM\ManyToOne(targetEntity=Phase::class, inversedBy="taches")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $phase;
 

@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        {% block edit_form %}
+            {{ form(edit_form) }}
+        {% endblock edit_form %}
+        {% block delete_form %}
+            {{ include('@EasyAdmin/crud/includes/_delete_form.html.twig', { entity_id: entity.primaryKeyValue }, with_context = false) }}
+        {% endblock delete_form %}
+        {% block page_actions %}
+            {% for action in entity.actions %}
+                {{ include(action.templatePath, { action: action }, with_context = false) }}
+            {% endfor %}
+        {% endblock %}
+    </div>
+{% endblock %}

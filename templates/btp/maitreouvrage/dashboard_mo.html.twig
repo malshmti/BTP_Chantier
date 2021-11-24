@@ -1,5 +1,9 @@
 {% extends 'base.html.twig' %}
 
+{% set urlCreaChantier = ea_url()
+    .setController('App\\Controller\\Admin\\ChantierCrudController')
+    .setAction('new') %}
+
 {% block body %}
     <div class="dash">
         <div class="container dashBoardContain">
@@ -9,9 +13,11 @@
                 <h2>Vous n'avez pas de chantier</h2>
             {% else %}
                 <h2>Chantiers</h2>
-                <button type="button" class="btn btn-light text-white nav-item nav-link consult">
-                Commander un chantier
+                <a class="text-decoration-none" href="{{ urlCreaChantier }}">
+                    <button type="button" class="btn btn-light text-white nav-item nav-link consult">
+                    Commander un chantier
                 </button>
+                </a>
                 <br>
                 <div class="row justify-content-between ">
                     {% for chantier in chantiers %}
@@ -41,65 +47,6 @@
                     {% endfor %}
                 </div>
             {% endif %}
-            <div class="d-flex justify-content-left row">
-                <div class="col-md-6">
-                    <div class="card-hover-shadow-2x mb-3 card">
-                        <div class="card-header-tab card-header">
-                            <div class="card-header-title font-size-lg text-capitalize font-weight-normal"><i class="fa fa-tasks"></i>&nbsp;Liste des taches assignées</div>
-                        </div>
-                        <div class="scroll-area-sm">
-                            <perfect-scrollbar class="ps-show-limits">
-                                <div style="position: static;" class="ps ps--active-y">
-                                    <div class="ps-content">
-                                        <ul class=" list-group list-group-flush">
-                                            <li class="list-group-item">
-                                                <div class="widget-content p-0">
-                                                    <div class="widget-content-wrapper">
-{#                                                        <div class="widget-content-left mr-2"></div>#}
-                                                        <div class="widget-content-left flex2">
-                                                            <div class="widget-heading">Rénovation maison individuelle </div>
-                                                            <div class="widget-subheading">Par Malsor</div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </perfect-scrollbar>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="card-hover-shadow-2x mb-3 card">
-                        <div class="card-header-tab card-header">
-                            <div class="card-header-title font-size-lg text-capitalize font-weight-normal">
-                                <i class="fa fa-tasks"></i>&nbsp;Liste des taches à approuver
-                            </div>
-                        </div>
-                        <div class="scroll-area-sm">
-                            <perfect-scrollbar class="ps-show-limits">
-                                <div style="position: static;" class="ps ps--active-y">
-                                    <div class="ps-content">
-                                        <ul class=" list-group list-group-flush">
-                                            <li class="list-group-item">
-                                                <div class="widget-content p-0">
-                                                    <div class="widget-content-wrapper">
-                                                        <div class="widget-content-left flex2">
-                                                            <div class="widget-heading">Construction ferme d'Ayoub </div>
-                                                            <div class="widget-subheading">By Ayoub</div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </perfect-scrollbar>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 {% endblock body %}                

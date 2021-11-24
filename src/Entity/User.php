@@ -59,6 +59,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->chantiers = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+        return sprintf($this->email);
+    }
+
     public function getId(): ?int
     {
         return $this->id;

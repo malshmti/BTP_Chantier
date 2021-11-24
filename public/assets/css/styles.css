@@ -169,11 +169,28 @@ video {
     border-color: rgba(0,0,0,0) !important;
 }
 
+.voirTachesCours{
+    margin-top: 3%;
+    background-color: #8a916f !important;
+    border-color: rgba(0,0,0,0) !important;
+}
+
+.validTask{
+    background-color: #78e08f !important;
+    margin-top: 3%;
+    border-color: rgba(0,0,0,0) !important;
+}
+
+.btn-group>.btn-group:not(:first-child), .btn-group>.btn:not(:first-child){
+    margin-left: 3% !important;
+}
+
 .closeModal{
     background-color: rgba(138, 145, 111, 0.66) !important;
     border-color: rgba(0,0,0,0) !important;
 
 }
+
 
 .modal-title {
     color: #8a916f;

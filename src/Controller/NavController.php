@@ -118,7 +118,7 @@ class NavController extends AbstractController
     }
 
     /**
-     * @Route("/maitreouvrage", name="maitreouvrage")
+     * @Route("/maitreouvrage", name="dashboard_maitreouvrage")
      */
     public function dashMo(): Response
     {

@@ -43,7 +43,7 @@ class RegistrationController extends AbstractController
                 case "Prestataire":
                     return $this->redirectToRoute('dashboard_prestataire');
                 case "Maitre d'ouvrage":
-                    return $this->redirectToRoute('');
+                    return $this->redirectToRoute('dashboard_maitreouvrage');
                 case "Conducteur de travaux":
                     return $this->redirectToRoute('dashboard_conducteur');
             }
