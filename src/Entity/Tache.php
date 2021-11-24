@@ -55,8 +55,24 @@ class Tache implements \JsonSerializable
      */
     private $approbationTache;
 
-    public function __construct() {
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $dureeReelle;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Tache::class, cascade={"persist", "remove"})
+     */
+    private $dependanceTache;
+
+    public function __construct() 
+    {
         $this->dateDebut = new DateTime("now", new DateTimeZone('Europe/Paris'));
+    }
+
+    public function __toString()
+    {
+        return sprintf(' %s de la phase %s', $this->nom, $this->phase->getNom());
     }
 
     public function jsonSerialize()
@@ -159,6 +175,30 @@ class Tache implements \JsonSerializable
         }
 
         $this->approbationTache = $approbationTache;
+
+        return $this;
+    }
+
+    public function getDureeReelle(): ?int
+    {
+        return $this->dureeReelle;
+    }
+
+    public function setDureeReelle(?int $dureeReelle): self
+    {
+        $this->dureeReelle = $dureeReelle;
+
+        return $this;
+    }
+
+    public function getDependanceTache(): ?self
+    {
+        return $this->dependanceTache;
+    }
+
+    public function setDependanceTache(?self $dependanceTache): self
+    {
+        $this->dependanceTache = $dependanceTache;
 
         return $this;
     }

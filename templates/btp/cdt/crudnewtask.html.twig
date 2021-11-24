@@ -24,6 +24,9 @@
             {{ form_label(new_form.prestataire) }}
             {{ form_widget(new_form.prestataire, {'attr': {'class':'form-control','style': "width: max-content"}}) }}
 
+            {{ form_label(new_form.dependanceTache) }}
+            {{ form_widget(new_form.dependanceTache, {'attr': {'class':'form-control','style': "width: max-content"}}) }}
+
             {{ form_end(new_form) }}
         {% endblock new_form %}
         {% block page_actions %}

@@ -36,6 +36,7 @@ class TacheCrudController extends AbstractCrudController
                 ->renderAsChoice(),
             AssociationField::new('phase'),
             AssociationField::new('prestataire'),
+            AssociationField::new('dependanceTache'),
         ];
     }
 
