@@ -18,12 +18,13 @@ class ChantierCrudController extends AbstractCrudController
         return Chantier::class;
     }
 
-//    public function configureCrud(Crud $crud): Crud
-//    {
-//        return $crud
-//            ->overrideTemplate('crud/new', 'crudnewcustom.html.twig')
-//            ;
-//    }
+    public function configureCrud(Crud $crud): Crud
+    {
+        return $crud
+            ->overrideTemplate('crud/new', '/btp/maitreouvrage/crudnewchantier.html.twig')
+            ->overrideTemplate('crud/edit', 'crudeditcustom.html.twig')
+            ;
+    }
 
     public function configureFields(string $pageName): iterable
     {
@@ -40,7 +41,10 @@ class ChantierCrudController extends AbstractCrudController
 
         $fields[] = AssociationField::new('users')->onlyOnForms()->setFormTypeOptions([
             "choices" => $users
-        ]);
+        ])
+        ->setFormTypeOptionIfNotSet('by_reference', false)
+
+        ;
 
         return $fields;
     }

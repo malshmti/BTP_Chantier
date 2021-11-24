@@ -3,7 +3,7 @@
 
 {% block body %}
     <button class="btn-retour btn btn-primary" type="button" onclick="history.go(-1)">< Retour</button>
-    <div class="container">
+    <div class="container mb-5">
         <h1>{{ chantier.nom }}</h1>
         <p><span class="title_attr font-weight-bold">Description : </span>{{ chantier.description }}</p>
         <p><span class="title_attr font-weight-bold">Localisation : </span>{{ chantier.localisation }}</p>
@@ -14,7 +14,7 @@
                     <div class="col-4">
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item "><span class=" title_attr font-weight-bold">Nom : </span>{{ phase.nom }}</li>
-                            <li class="list-group-item "><span class=" title_attr font-weight-bold">Description : </span>{{ phase.description }}</li>
+                            <li class="descri list-group-item "><span class="  title_attr font-weight-bold">Description : </span>{{ phase.description }}</li>
 
 
                             <button type="button" onclick="showTaches" class="voirTaches btn btn-primary" data-toggle="modal" data-target="#exampleModalLong_{{loop.index}}">

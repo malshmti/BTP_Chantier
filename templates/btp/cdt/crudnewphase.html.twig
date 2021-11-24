@@ -1,0 +1,26 @@
+{{ include('@base/base.html.twig') }}
+
+{% block body %}
+    <div class="container">
+        <h1>Créer une phase</h1>
+        {% block new_form %}
+            {{ form_start(new_form) }}
+
+            {{ form_label(new_form.nom) }}
+            {{ form_widget(new_form.nom, {'attr': {'class': "form-control"}}) }}
+
+            {{ form_label(new_form.description) }}
+            {{ form_widget(new_form.description, {'attr': {'class':'form-control','style': ""}}) }}
+
+            {{ form_label(new_form.chantier) }}
+            {{ form_widget(new_form.chantier, {'attr': {'class':'form-control','style': "width: max-content"}}) }}
+
+            {{ form_end(new_form) }}
+        {% endblock new_form %}
+        {% block page_actions %}
+            {% for action in entity.actions %}
+                {{ include(action.templatePath, { action: action }, with_context = false) }}
+            {% endfor %}
+        {% endblock %}
+    </div>
+{% endblock %}

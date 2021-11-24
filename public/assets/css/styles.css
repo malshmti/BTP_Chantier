@@ -251,3 +251,24 @@ video {
 label{
     display: block !important;
 }
+
+.descri {
+    height: 200px;
+}
+
+.action-save {
+    margin-top: 5%;
+}
+
+.action-saveAndAddAnother {
+    margin-right : 2%;
+    background-color: #8a916f !important;
+    border-color: rgba(0,0,0,0) !important;
+
+}
+
+.action-saveAndReturn {
+    background-color: #78e08f !important;
+    border-color: rgba(0,0,0,0) !important;
+
+}

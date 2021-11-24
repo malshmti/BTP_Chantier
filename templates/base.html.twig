@@ -46,12 +46,11 @@
                     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                         <div class="navbar-nav">
                             {% if is_granted("ROLE_MAITREOUVRAGE") %}
-                                <a class="nav-item nav-link text-white" href="{{ path('') }}">Votre tableau de bord<span class="sr-only">(current)</span></a>
+                                <a class="nav-item nav-link text-white" href="{{ path('dashboard_maitreouvrage') }}">Votre tableau de bord<span class="sr-only">(current)</span></a>
                                 <a class="nav-item nav-link text-white" href="">Vos chantiers</a>
                             {% endif %}
                             {% if is_granted("ROLE_PRESTATAIRE>") %}
-                                <a class="nav-item nav-link text-white" href="{{ path('') }}">Votre tableau de bord<span class="sr-only">(current)</span></a>
-                                <a class="nav-item nav-link text-white" href="">Vos chantiers</a>
+                                <a class="nav-item nav-link text-white" href="{{ path('dashboard_prestataire') }}">Votre tableau de bord<span class="sr-only">(current)</span></a>
                             {% endif %}
                             {% if is_granted("ROLE_CONDUCTEURTRAVAUX") %}
                                 <a class="nav-item nav-link text-white" href="{{ path('dashboard_conducteur') }}">Votre tableau de bord<span class="sr-only">(current)</span></a>

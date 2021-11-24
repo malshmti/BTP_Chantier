@@ -34,21 +34,17 @@ class NavController extends AbstractController
     */
     public function dashboardCdt(): Response
     {
-        $repo = $this->getDoctrine()->getRepository(User::class);
-
-        $repo = $this->getDoctrine()->getRepository(Chantier::class);
+        $repoUser = $this->getDoctrine()->getRepository(User::class);
         $repoPresta = $this->getDoctrine()->getRepository(Prestataire::class);
 
 
-//        /** @var User|null $user */
-//        $user = $repo->findOneBy([
-//            'email' => $this->getUser()->getUserIdentifier()
-//        ]);
-//
-//        $chantiers = $user->getChantier;
+        /** @var User|null $user */
+        $user = $repoUser->findOneBy([
+            'email' => $this->getUser()->getUserIdentifier()
+        ]);
 
+        $chantiers = $user->getChantiers();
 
-        $chantiers = $repo->findAll();
         $prestataires = $repoPresta->findAll();
 
         return $this->render('btp/cdt/dashboard_cdt.html.twig',[
@@ -63,6 +59,7 @@ class NavController extends AbstractController
     public function dashboardPresta(): Response
     {
         return $this->render('btp/presta/dashboard_presta.html.twig');
+
     }
 
 
@@ -122,9 +119,16 @@ class NavController extends AbstractController
      */
     public function dashMo(): Response
     {
-        $repo = $this->getDoctrine()->getRepository(Chantier::class);
+        $repoUser = $this->getDoctrine()->getRepository(User::class);
 
-        $chantiers = $repo->findAll();
+        /** @var User|null $user */
+        $user = $repoUser->findOneBy([
+            'email' => $this->getUser()->getUserIdentifier()
+        ]);
+
+
+        $chantiers = $user->getChantiers();
+
         return $this->render('btp/maitreouvrage/dashboard_mo.html.twig',[
             'chantiers' => $chantiers,
         ]);

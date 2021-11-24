@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\TacheRepository;
+use DateTime;
+use DateTimeZone;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -52,6 +54,10 @@ class Tache implements \JsonSerializable
      * @ORM\OneToOne(targetEntity=ApprobationTache::class, mappedBy="tache", cascade={"persist", "remove"})
      */
     private $approbationTache;
+
+    public function __construct() {
+        $this->dateDebut = new DateTime("now", new DateTimeZone('Europe/Paris'));
+    }
 
     public function jsonSerialize()
     {

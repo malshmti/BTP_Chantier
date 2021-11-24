@@ -52,7 +52,7 @@ class AppAuthenticator extends AbstractLoginFormAuthenticator
             case "Prestataire":
                 return new RedirectResponse($this->urlGenerator->generate('dashboard_prestataire'));
             case "Maitre d'ouvrage":
-                return new RedirectResponse($this->urlGenerator->generate('dashboard_prestataire'));
+                return new RedirectResponse($this->urlGenerator->generate('dashboard_maitreouvrage'));
             case "Conducteur de travaux":
                 return new RedirectResponse($this->urlGenerator->generate('dashboard_conducteur'));
             case "Administrateur":

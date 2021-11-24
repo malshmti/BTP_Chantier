@@ -19,7 +19,8 @@ class TacheCrudController extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
-            ->overrideTemplate('crud/new', 'crudnewtask.html.twig')
+            ->overrideTemplate('crud/new', 'btp/cdt/crudnewtask.html.twig')
+            ->overrideTemplate('crud/edit', 'crudeditcustom.html.twig')
             ;
     }
 

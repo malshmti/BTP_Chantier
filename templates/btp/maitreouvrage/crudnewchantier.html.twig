@@ -1,8 +1,8 @@
-{% extends 'base.html.twig' %}
+{{ include('@base/base.html.twig') }}
 
 {% block body %}
     <div class="container">
-        <h1>Créer une tâche</h1>
+        <h1>Commander un chantier</h1>
         {% block new_form %}
             {{ form_start(new_form) }}
 
@@ -12,17 +12,11 @@
             {{ form_label(new_form.description) }}
             {{ form_widget(new_form.description, {'attr': {'class':'form-control','style': ""}}) }}
 
-            {{ form_label(new_form.duree) }}
-            {{ form_widget(new_form.duree, {'attr': {'class':'form-control' ,'style': "width: 10%"}}) }}
+            {{ form_label(new_form.localisation) }}
+            {{ form_widget(new_form.localisation, {'attr': {'class':'form-control','style': "width: max-content"}}) }}
 
-            {{ form_label(new_form.phase) }}
-            {{ form_widget(new_form.phase, {'attr': {'class':'form-control','style': "width: max-content", 'required': 'true'}}) }}
-
-            {{ form_label(new_form.dateDebut) }}
-            {{ form_widget(new_form.dateDebut, {'attr': {'class':'date','style': ""}}) }}
-
-            {{ form_label(new_form.prestataire) }}
-            {{ form_widget(new_form.prestataire, {'attr': {'class':'form-control','style': "width: max-content"}}) }}
+            {{ form_label(new_form.users) }}
+            {{ form_widget(new_form.users, {'attr': {'class':'custom-select','style': "width: max-content"}}) }}
 
             {{ form_end(new_form) }}
         {% endblock new_form %}
