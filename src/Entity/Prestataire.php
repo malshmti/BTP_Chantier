@@ -10,27 +10,15 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass=PrestataireRepository::class)
  */
-class Prestataire implements \JsonSerializable
+class Prestataire extends User implements \JsonSerializable
 {
     /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
-    private $id;
-
-    /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $nom;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $email;
-
-    /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $telephone;
 
@@ -51,15 +39,14 @@ class Prestataire implements \JsonSerializable
 
     public function __toString(): string
     {
-        return sprintf("%s", $this->getNom());
+        return sprintf("%s", $this->getEmail());
     }
 
     public function jsonSerialize()
     {
         return [
-            'id' => $this->id,
+            'id' => $this->getId(),
             'nom' => $this->nom,
-            'email' => $this->email,
             'telephone' => $this->telephone,
 
         ];
@@ -67,7 +54,7 @@ class Prestataire implements \JsonSerializable
 
     public function getId(): ?int
     {
-        return $this->id;
+        return parent::getId();
     }
 
     public function getNom(): ?string
@@ -78,18 +65,6 @@ class Prestataire implements \JsonSerializable
     public function setNom(string $nom): self
     {
         $this->nom = $nom;
-
-        return $this;
-    }
-
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
-
-    public function setEmail(string $email): self
-    {
-        $this->email = $email;
 
         return $this;
     }

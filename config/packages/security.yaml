@@ -42,4 +42,4 @@ security:
          - { path: ^/admin/approval, roles: ROLE_ADMIN }
          - { path: ^/cdt, roles: [ROLE_CONDUCTEURTRAVAUX, ROLE_ADMIN] }
          - { path: ^/maitreouvrage, roles: [ROLE_MAITREOUVRAGE, ROLE_ADMIN] }
-         - { path: ^/presta, roles: [ROLE_MAITREOUVRAGE, ROLE_ADMIN] }
+         - { path: ^/presta, roles: [ROLE_PRESTATAIRE, ROLE_ADMIN] }
