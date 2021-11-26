@@ -5,7 +5,10 @@ namespace App\Controller;
 use App\Controller\Admin\PrestataireCrudController;
 use App\Entity\Chantier;
 use App\Entity\Prestataire;
+use App\Entity\Tache;
 use App\Entity\User;
+use DateTime;
+use DateTimeZone;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -58,7 +61,26 @@ class NavController extends AbstractController
      */
     public function dashboardPresta(): Response
     {
-        return $this->render('btp/presta/dashboard_presta.html.twig');
+        $repoTache = $this->getDoctrine()->getRepository(Tache::class);
+
+        $taches = $repoTache->findAll();
+
+        $tachesPlan = $this->getDoctrine()
+            ->getManager()
+            ->createQuery('SELECT t FROM App:Tache t WHERE t.dateDebut > CURRENT_DATE() AND t.dureeReelle IS NULL' )
+            ->getResult();
+
+        $tachesCours = $this->getDoctrine()
+            ->getManager()
+            ->createQuery('SELECT t FROM App:Tache t WHERE t.dateDebut < CURRENT_DATE() AND t.dureeReelle IS NULL' )
+            ->getResult();
+
+
+        return $this->render('btp/presta/dashboard_presta.html.twig', [
+            'taches' => $taches,
+            'tachesPlan' => $tachesPlan,
+            'tachesCours' => $tachesCours
+        ]);
 
     }
 
@@ -149,7 +171,16 @@ class NavController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/presta/validateTask/{id}", name="validate_task")
+     */
+    public function validateTask(Tache $tache): Response
+    {
+        $repo = $this->getDoctrine()->getRepository(Tache::class);
+        $repo->updateDureeReelle($tache);
 
+        return $this->redirectToRoute('dashboard_prestataire');
+    }
 
 
 //    #[Route("/blog/articles/12", name:"blog_show")]

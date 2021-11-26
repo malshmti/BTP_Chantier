@@ -5,39 +5,69 @@
 <h1>Tableau de bord : Prestataire</h1>
 <hr>
     <div class="d-flex justify-content-left row">
-        <div class="col-md-6">
+        <div class="col-md-12">
             <div class="card-hover-shadow-2x mb-3 card">
                 <div class="card-header-tab card-header">
-                    <div class="card-header-title font-size-lg text-capitalize font-weight-normal"><i class="fa fa-tasks"></i>&nbsp;Liste des taches assignées</div>
+                    <div class="card-header-title font-size-lg font-weight-bold text-warning"><i class="fa fa-tasks"></i>Tâches planifiées</div>
                 </div>
                 <div class="scroll-area-sm">
                     <perfect-scrollbar class="ps-show-limits">
                         <div style="position: static;" class="ps ps--active-y">
                             <div class="ps-content">
                                 <ul class=" list-group list-group-flush">
-                                    
-                                    <li class="list-group-item">
-                                        <div class="widget-content p-0">
-                                            <div class="widget-content-wrapper">
-                                                <div class="widget-content-left mr-2">
-                                                    <div class="custom-checkbox custom-control"><input class="custom-control-input" id="exampleCustomCheckbox4" type="checkbox"><label class="custom-control-label" for="exampleCustomCheckbox4">&nbsp;</label></div>
+                                    {% for tachePlan in tachesPlan  %}
+                                            <li class="list-group-item">
+                                                <div class="widget-content p-0">
+                                                    <div class="widget-content-wrapper">
+                                                        <div class="widget-content-left flex2">
+                                                            <div class="widget-heading">{{ tachePlan.nom }}</div>
+                                                            <div class="widget-subheading"><span class="title_attr font-weight-bold">Durée prévue : </span>{{ tachePlan.duree}} jours</div>
+                                                        </div>
+                                                        <div class="widget-content-right font-weight-bold">{{ tachePlan.dateDebut | date('d/m/Y')}}</div>
+                                                    </div>
                                                 </div>
-                                                <div class="widget-content-left flex2">
-                                                    <div class="widget-heading">Rénovation maison individuelle </div>
-                                                    <div class="widget-subheading">Par Malsor</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    
+                                            </li>
+                                    {% endfor %}
                                 </ul>
                             </div>
                         </div>
                     </perfect-scrollbar>
                 </div>
-                <div class="d-block text-right card-footer">
-                    <button type="button" class="btn btn-default">Annuler</button>
-                    <button class="btn btn-primary">Valider</button>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card-hover-shadow-2x mb-3 card">
+                <div class="card-header-tab card-header">
+                    <div class="card-header-title font-size-lg font-weight-bold text-primary"><i class="fa fa-tasks"></i>Tâches en cours</div>
+                </div>
+                <div class="scroll-area-sm">
+                    <perfect-scrollbar class="ps-show-limits">
+                        <div style="position: static;" class="ps ps--active-y">
+                            <div class="ps-content">
+                                <ul class=" list-group list-group-flush">
+                                    {% for tacheCours in tachesCours %}
+                                            <li class="list-group-item">
+                                                <div class="widget-content p-0">
+                                                    <div class="widget-content-wrapper">
+                                                        <div class="widget-content-left flex2">
+                                                            <div class="widget-heading">{{ tacheCours.nom }}</div>
+                                                            <div class="widget-subheading">{{ tacheCours.dateDebut | date('d/m/Y')}}</div>
+                                                        </div>
+                                                        <div  style="max-width: 150px" class="widget-content-right">
+                                                                <a href="{{ path('validate_task', {'id': tacheCours.id}) }}">
+                                                                    <button type="button" class="validTask btn btn-success">Terminée</button>
+                                                                </a>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                    {% endfor %}
+
+                                </ul>
+                            </div>
+                        </div>
+                    </perfect-scrollbar>
                 </div>
             </div>
         </div>
@@ -45,29 +75,31 @@
         <div class="col-md-6">
             <div class="card-hover-shadow-2x mb-3 card">
                 <div class="card-header-tab card-header">
-                    <div class="card-header-title font-size-lg text-capitalize font-weight-normal"><i class="fa fa-tasks"></i>&nbsp;Liste des taches à approuver</div>
+                    <div class="card-header-title font-size-lg text-capitalize font-weight-bold text-success"><i class="fa fa-tasks"></i>Tâches terminées</div>
                 </div>
                 <div class="scroll-area-sm">
                     <perfect-scrollbar class="ps-show-limits">
                         <div style="position: static;" class="ps ps--active-y">
                             <div class="ps-content">
                                 <ul class=" list-group list-group-flush">
-                                    
-                                    <li class="list-group-item">
-                                        <div class="widget-content p-0">
-                                            <div class="widget-content-wrapper">
-                                            <div class="widget-content-left flex2">
-                                                <div class="widget-heading">Construction ferme d'Ayoub </div>
-                                                <div class="widget-subheading">By Ayoub</div>
-                                            </div>
-                                            <div class="widget-content-right"> 
-                                            <button type="button" class="btn btn-success">Accepter</button> 
-                                            <button type="button" class="btn btn-danger">Refuser</button>
-                                            </div>
-                                        </div>
-                                        </div>
-                                    </li>
-                                    
+                                    {% for tache in taches %}
+                                        {% if tache.getDureeReelle()!=null %}
+                                            <li class="list-group-item">
+                                                <div class="widget-content p-0">
+                                                    <div class="widget-content-wrapper">
+                                                        <div class="widget-content-left flex2">
+                                                            <div class="widget-heading">{{ tache.nom }}</div>
+{#                                                            <div class="widget-subheading">By Ayoub</div>#}
+                                                        </div>
+                                                        <div class="widget-content-right">
+                                                            <i class="fas fa-check-square"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        {% else %}
+                                        {% endif %}
+                                    {% endfor %}
                                 </ul>
                             </div>
                         </div>
