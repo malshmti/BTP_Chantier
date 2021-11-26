@@ -3,6 +3,8 @@
 namespace App\Repository;
 
 use App\Entity\Tache;
+use DateTime;
+use DateTimeZone;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -18,6 +20,30 @@ class TacheRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Tache::class);
     }
+
+    public function updateDureeReelle(Tache $tache): void
+    {
+
+        $dateDebut = $tache->getDateDebut();
+        $dateFin = new DateTime("now", new DateTimeZone('Europe/Paris'));
+
+        if ($dateDebut < $dateFin) {
+            echo "Une tâche ne peut pas se terminer avant d'avoir commencé !";
+        } else {
+            $dureeReelle = date_diff($dateDebut, $dateFin);
+
+            $tache->setDureeReelle($dureeReelle->d);
+
+            $this->_em->persist($tache);
+            $this->_em->flush();
+        }
+
+    }
+
+
+
+
+
 
     // /**
     //  * @return Tache[] Returns an array of Tache objects
