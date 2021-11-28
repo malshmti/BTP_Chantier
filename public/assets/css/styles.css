@@ -267,6 +267,13 @@ label{
 
 }
 
+.connect {
+    margin-top : 2%;
+    background-color: #8a916f !important;
+    border-color: rgba(0,0,0,0) !important;
+
+}
+
 .action-saveAndReturn {
     background-color: #78e08f !important;
     border-color: rgba(0,0,0,0) !important;
@@ -275,4 +282,14 @@ label{
 
 .denied-window{
 
+}
+
+.edit{
+    background-color: #ffba50 !important;
+    border-color: rgba(0,0,0,0) !important;
+}
+
+.delete{
+    background-color: #ff5050 !important;
+    border-color: rgba(0,0,0,0) !important;
 }

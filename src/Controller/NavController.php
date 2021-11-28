@@ -16,14 +16,15 @@ use Symfony\Component\Routing\Annotation\Route;
 class NavController extends AbstractController
 {
     /**
-    *@Route("/btp", name="btp")
-    */
-    public function index():Response
+     * @Route("/btp", name="btp")
+     */
+    public function index(): Response
     {
         return $this->render('btp/index.html.twig', [
             'controller_name' => 'NavController',
         ]);
     }
+
     /**
      * @Route("/", name="home")
      */
@@ -33,8 +34,8 @@ class NavController extends AbstractController
     }
 
     /**
-    *@Route("/cdt", name="dashboard_conducteur")
-    */
+     * @Route("/cdt", name="dashboard_conducteur")
+     */
     public function dashboardCdt(): Response
     {
         $repoUser = $this->getDoctrine()->getRepository(User::class);
@@ -50,7 +51,8 @@ class NavController extends AbstractController
 
         $prestataires = $repoPresta->findAll();
 
-        return $this->render('btp/cdt/dashboard_cdt.html.twig',[
+
+        return $this->render('btp/cdt/dashboard_cdt.html.twig', [
             'chantiers' => $chantiers,
             'prestataires' => $prestataires,
         ]);
@@ -78,14 +80,21 @@ class NavController extends AbstractController
 
         $tachesEnCours = $this->getDoctrine()
             ->getManager()
-            ->createQuery('SELECT t FROM App:Tache t WHERE t.dateDebut < CURRENT_DATE() AND t.dureeReelle IS NULL AND t.prestataire = :id' )
+            ->createQuery('SELECT t FROM App:Tache t WHERE t.dateDebut <= CURRENT_DATE() AND t.dureeReelle IS NULL AND t.prestataire = :id')
+            ->setParameter('id', $user->getId())
+            ->getResult();
+
+        $tachesTerminees = $this->getDoctrine()
+            ->getManager()
+            ->createQuery('SELECT t FROM App:Tache t WHERE t.dureeReelle IS NOT NULL AND t.prestataire = :id')
             ->setParameter('id', $user->getId())
             ->getResult();
 
         return $this->render('btp/presta/dashboard_presta.html.twig', [
             'taches' => $taches,
             'tachesPlan' => $tachesPlanifiees,
-            'tachesCours' => $tachesEnCours
+            'tachesCours' => $tachesEnCours,
+            'tachesTerm' => $tachesTerminees
         ]);
 
     }
@@ -100,7 +109,7 @@ class NavController extends AbstractController
 
         $chantier = $repo->find($id);
 
-        return $this->render('btp/cdt/consult_chantier.html.twig',[
+        return $this->render('btp/cdt/consult_chantier.html.twig', [
             'chantier' => $chantier,
             'phases' => $chantier->getPhases(),
         ]);
@@ -137,7 +146,7 @@ class NavController extends AbstractController
 
         $prestataire = $repo->find($id);
 
-        return $this->render('btp/cdt/consult_prestataire.html.twig',[
+        return $this->render('btp/cdt/consult_prestataire.html.twig', [
             'prestataire' => $prestataire,
         ]);
     }
@@ -157,7 +166,7 @@ class NavController extends AbstractController
 
         $chantiers = $user->getChantiers();
 
-        return $this->render('btp/maitreouvrage/dashboard_mo.html.twig',[
+        return $this->render('btp/maitreouvrage/dashboard_mo.html.twig', [
             'chantiers' => $chantiers,
         ]);
     }
@@ -171,7 +180,7 @@ class NavController extends AbstractController
 
         $chantier = $repo->find($id);
 
-        return $this->render('btp/maitreouvrage/consult_chantier.html.twig',[
+        return $this->render('btp/maitreouvrage/consult_chantier.html.twig', [
             'chantier' => $chantier,
             'phases' => $chantier->getPhases(),
         ]);
@@ -202,4 +211,34 @@ class NavController extends AbstractController
 //    {
 //        return $this->render('blog/show.html.twig');
 //    }
+
+    /**
+     * @Route("/waitingapproval", name="waiting_approval")
+     */
+    public function awaitingApproval(): Response
+    {
+        return $this->render('registration/approval_waiting.html.twig');
+    }
+
+    /**
+     * @Route("/chantier/{search}", name="searchbychantier")
+     */
+    public function searchByChantier($search): Response
+    {
+        $repoChantier = $this->getDoctrine()->getRepository(Chantier::class);
+
+        $chantiers = $this->getDoctrine()
+            ->getManager()
+            ->createQuery("SELECT c FROM App:Chantier c WHERE c.nom LIKE :search")
+            ->setParameter('search', '%'.$search.'%')
+            ->getResult();
+
+
+        return $this->render('registration/approval_waiting.html.twig',[
+            'chantiers' => $chantiers,
+        ]);
+
+    }
+
 }
+

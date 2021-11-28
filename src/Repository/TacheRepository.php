@@ -27,16 +27,13 @@ class TacheRepository extends ServiceEntityRepository
         $dateDebut = $tache->getDateDebut();
         $dateFin = new DateTime("now", new DateTimeZone('Europe/Paris'));
 
-        if ($dateDebut < $dateFin) {
-            echo "Une tâche ne peut pas se terminer avant d'avoir commencé !";
-        } else {
             $dureeReelle = date_diff($dateDebut, $dateFin);
 
             $tache->setDureeReelle($dureeReelle->d);
 
             $this->_em->persist($tache);
             $this->_em->flush();
-        }
+
 
     }
 

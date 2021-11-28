@@ -8,7 +8,7 @@
         <div class="col-md-12">
             <div class="card-hover-shadow-2x mb-3 card">
                 <div class="card-header-tab card-header">
-                    <div class="card-header-title font-size-lg font-weight-bold text-warning"><i class="fa fa-tasks"></i>Tâches planifiées</div>
+                    <div class="card-header-title font-size-lg font-weight-bold text-warning"><i class="fa fa-calendar"></i> Tâches planifiées</div>
                 </div>
                 <div class="scroll-area-sm">
                     <perfect-scrollbar class="ps-show-limits">
@@ -38,7 +38,7 @@
         <div class="col-md-6">
             <div class="card-hover-shadow-2x mb-3 card">
                 <div class="card-header-tab card-header">
-                    <div class="card-header-title font-size-lg font-weight-bold text-primary"><i class="fa fa-tasks"></i>Tâches en cours</div>
+                    <div class="card-header-title font-size-lg font-weight-bold text-primary"><i class="fa fa-spinner"></i> Tâches en cours</div>
                 </div>
                 <div class="scroll-area-sm">
                     <perfect-scrollbar class="ps-show-limits">
@@ -75,30 +75,24 @@
         <div class="col-md-6">
             <div class="card-hover-shadow-2x mb-3 card">
                 <div class="card-header-tab card-header">
-                    <div class="card-header-title font-size-lg text-capitalize font-weight-bold text-success"><i class="fa fa-tasks"></i>Tâches terminées</div>
+                    <div class="card-header-title font-size-lg text-capitalize font-weight-bold text-success"><i class="fa fa-check-square"></i> Tâches terminées</div>
                 </div>
                 <div class="scroll-area-sm">
                     <perfect-scrollbar class="ps-show-limits">
                         <div style="position: static;" class="ps ps--active-y">
                             <div class="ps-content">
                                 <ul class=" list-group list-group-flush">
-                                    {% for tache in taches %}
-                                        {% if tache.getDureeReelle()!=null %}
+                                    {% for tacheTerm in tachesTerm %}
                                             <li class="list-group-item">
                                                 <div class="widget-content p-0">
                                                     <div class="widget-content-wrapper">
                                                         <div class="widget-content-left flex2">
-                                                            <div class="widget-heading">{{ tache.nom }}</div>
+                                                            <div class="widget-heading">{{ tacheTerm.nom }}</div>
 {#                                                            <div class="widget-subheading">By Ayoub</div>#}
-                                                        </div>
-                                                        <div class="widget-content-right">
-                                                            <i class="fas fa-check-square"></i>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </li>
-                                        {% else %}
-                                        {% endif %}
                                     {% endfor %}
                                 </ul>
                             </div>

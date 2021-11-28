@@ -7,19 +7,31 @@
     <div class="dash">
 
         <div class="container dashBoardContain">
+            <div class="input-group">
+                <div class="form-outline">
+                    <input type="search" id="form1" class="form-control" />
+                    <label class="form-label" for="form1">Search</label>
+                </div>
+                <a href="{{ path('searchbychantier') }}">
+                    <button type="button" class="btn btn-primary">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </a>
+
+            </div>
             <h1>Tableau de bord</h1>
             <hr>
             <h2>Chantiers</h2>
             <div class="row justify-content-between ">
                 {% for chantier in chantiers %}
                 <div class="mb-3 col-4">
-                    <div class="carte">
+                    <div style="min-height: 500px" class="carte">
                         <div class="card-body">
                             <h5 class="card-title">{{ chantier.nom }}</h5>
-                            <p class="card-text">{{ chantier.description }}</p>
+                            <p style="min-height: 220px" class="card-text">{{ chantier.description }}</p>
                         </div>
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item "><span class="d-block font-weight-bold">Localisation</span>{{ chantier.localisation }}</li>
+                            <li style="min-height: 100px" class="list-group-item "><span class="d-block font-weight-bold">Localisation</span>{{ chantier.localisation }}</li>
                         </ul>
                         <div class="card-body">
                                 <a href="{{ path('consult_chantier', {'id': chantier.id} ) }}" class="card-link">
@@ -49,15 +61,13 @@
                     <tbody>
                     {% for prestataire in prestataires %}
                     <tr>
-                        <th scope="row">{{ prestataire.id }}</th>
+                        <th scope="row"></th>
                         <td>{{ prestataire.nom }}</td>
                         <td>{{ prestataire.email }}</td>
                         <td>{{ prestataire.telephone }}</td>
                         <td>
                             <a href="{{ path('consult_prestataire', {'id': prestataire.id} ) }}" class="card-link">
-                                <button type="button" class="btn btn-light text-white nav-item nav-link consult_presta">
-                                    Voir plus
-                                </button>
+                                <i style="font-size:30px;color: #8a916f" class="fa fa-info-circle"></i>
                             </a>
                         </td>
                     </tr>

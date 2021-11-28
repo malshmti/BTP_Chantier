@@ -2,12 +2,15 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Phase;
 use App\Entity\Tache;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
+use EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class TacheCrudController extends AbstractCrudController
 {
@@ -38,6 +41,19 @@ class TacheCrudController extends AbstractCrudController
             AssociationField::new('prestataire'),
             AssociationField::new('dependanceTache'),
         ];
+    }
+
+    protected function getRedirectResponseAfterSave(AdminContext $context, string $action): RedirectResponse
+    {
+        $repo = $this->getDoctrine()->getRepository(Tache::class);
+
+        /** @var Tache|null $tache */
+        $tache = $repo->find($context->getEntity()->getPrimaryKeyValue());
+        $phase = $tache->getPhase();
+        $chantier = $phase->getChantier();
+
+
+        return $this->redirectToRoute('consult_chantier', ['id' => $chantier->getId()]);
     }
 
     /*public function editSettingAction()

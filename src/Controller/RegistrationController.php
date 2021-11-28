@@ -45,15 +45,16 @@ class RegistrationController extends AbstractController
             $entityManager->flush();
             // do anything else you need here, like send an email
 
+            return $this->redirectToRoute('waiting_approval');
 
-            switch($user->getTypeActeur()) {
-                case "Prestataire":
-                    return $this->redirectToRoute('dashboard_prestataire');
-                case "Maitre d'ouvrage":
-                    return $this->redirectToRoute('dashboard_maitreouvrage');
-                case "Conducteur de travaux":
-                    return $this->redirectToRoute('dashboard_conducteur');
-            }
+//            switch($user->getTypeActeur()) {
+//                case "Prestataire":
+//                    return $this->redirectToRoute('dashboard_prestataire');
+//                case "Maitre d'ouvrage":
+//                    return $this->redirectToRoute('dashboard_maitreouvrage');
+//                case "Conducteur de travaux":
+//                    return $this->redirectToRoute('dashboard_conducteur');
+//            }
 
         }
 

@@ -1,24 +1,32 @@
 {% extends 'base.html.twig' %}
 
-
-
 {% block body %}
     <div class="container">
         <h1>{{ chantier.nom }}</h1>
         <p>{{ chantier.description }}</p>
         <p>{{ chantier.localisation }}</p>
+
+        <a class="text-decoration-none" href={{ ea_url()
+            .setController('App\\Controller\\Admin\\ChantierCrudController')
+            .setAction('edit')
+            .setEntityId(chantier.id) }}>
+            <button class="edit btn btn-warning">
+                <i style="font-size: 30px; color: white" class="fa fa-edit"></i>
+            </button>
+        </a>
+
         <h2>Phases du chantier</h2>
         <div class="row">
             {% for phase in phases %}
-                {% set urlEditPhase = ea_url()
-                    .setController('App\\Controller\\Admin\\PhaseCrudController')
-                    .setAction('edit')
-                    .setEntityId(phase.id) %}
 
                 <div class="col-4">
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item "><span class=" title_attr font-weight-bold">Nom : </span>{{ phase.nom }}</li>
                         <li class="list-group-item "><span class=" title_attr font-weight-bold">Description : </span>{{ phase.description }}</li>
+                        {{ ea_url()
+                            .setController('App\\Controller\\Admin\\TacheCrudController')
+                            .setAction('edit')
+                            .setEntityId(tache.id) }}
 
                         <div class="btn-group" role="group" aria-label="Basic example">
                             <button type="button" class="voirTaches btn btn-primary" data-toggle="modal" data-target="#exampleModalLong_{{loop.index}}">

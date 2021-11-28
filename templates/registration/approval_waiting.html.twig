@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div style="margin-top: 5%" class="container">
+        {% for chantier in chantiers %}
+            {{ chantier.nom }}
+        {% endfor %}
+        <div style="font-size: large" class="font-weight-bold">L'équipe de BTP Monitoring vous remercie de choisir d'utiliser nos services !
+        </div>
+        <hr>
+        <div>Votre inscription est en attente de confirmation. Rendez-vous sur la page <a href="{{ path('app_login') }}">Connexion</a> pour vous connecter lorsque votre inscription aura été acceptée</div>
+
+    </div>
+
+{% endblock body %}
