@@ -3,8 +3,20 @@
 
 
 
+
 {% block body %}
+    {{ include('@EasyAdmin/crud/includes/_delete_form.html.twig', with_context = false) }}
+
     <button class="btn-retour btn btn-primary" type="button" onclick="history.go(-1)">< Retour</button>
+    <div class="input-group">
+        <div class="form-outline">
+            <input id="search-input" type="search" id="form1" class="form-control" />
+            <label class="form-label" for="form1">Search</label>
+        </div>
+        <button id="search-button" type="button" class="btn btn-primary">
+            oui
+        </button>
+    </div>
 
     <div class="container mb-5">
         <h1>{{ chantier.nom }}</h1>
@@ -30,11 +42,8 @@
                                     </button>
                                 </a>
 
-                                <a class="text-decoration-none" href={{ ea_url()
-                                    .setController('App\\Controller\\Admin\\PhaseCrudController')
-                                    .setAction('delete')
-                                    .setEntityId(phase.id) }}>
-                                    <button class="delete btn btn-danger">
+                                <a class="text-decoration-none action-delete text-danger px-1 " data-entityId="{{ phase.id }}">
+                                    <button class="delete btn btn-danger" >
                                         <i style="font-size: 30px; color: white" class="fa fa-trash"></i>
                                     </button>
                                 </a>
@@ -95,5 +104,39 @@
         </div>
 
     </div>
+    <script type="text/javascript">
+        window.onload = function() {
+            $('.action-delete').on('click', function(e) {
+                e.preventDefault();
+                //const id = $(this).parents('[data-id]').first().data('id'); => Replaced by the following line
+                const id = $(this).attr('data-entityId');
 
+                $('#modal-delete').modal({ backdrop: true, keyboard: true })
+                    .off('click', '#modal-delete-button')
+                    .on('click', '#modal-delete-button', function () {
+                        let deleteForm = $('#delete-form');
+                        deleteForm.attr('action', deleteForm.attr('action').replace('__entityId_placeholder__', id));
+                        deleteForm.trigger('submit');
+                    });
+            });
+
+            const searchButton = document.getElementById('search-button');
+            const searchInput = document.getElementById('search-input');
+            searchButton.addEventListener('click', () => {
+                const inputValue = searchInput.value;
+                if(inputValue) {
+                    window.location.href = `/${inputValue}`;
+                }
+            });
+
+            searchInput.addEventListener("keyup", ({key}) => {
+                if (key === "Enter") {
+                    const inputValue = searchInput.value;
+                    if(inputValue) {
+                        window.location.href = `/${inputValue}`;
+                    }
+                }
+            })
+        }
+    </script>
 {% endblock body %}

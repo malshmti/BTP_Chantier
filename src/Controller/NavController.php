@@ -221,23 +221,43 @@ class NavController extends AbstractController
     }
 
     /**
-     * @Route("/chantier/{search}", name="searchbychantier")
+     * @Route("/cdt/chantier/search/{search}", name="searchbychantier")
      */
     public function searchByChantier($search): Response
     {
-        $repoChantier = $this->getDoctrine()->getRepository(Chantier::class);
-
         $chantiers = $this->getDoctrine()
             ->getManager()
             ->createQuery("SELECT c FROM App:Chantier c WHERE c.nom LIKE :search")
             ->setParameter('search', '%'.$search.'%')
             ->getResult();
 
+        $repoPresta = $this->getDoctrine()->getRepository(Prestataire::class);
+        $prestataires = $repoPresta->findAll();
 
-        return $this->render('registration/approval_waiting.html.twig',[
+
+
+        return $this->render('btp/cdt/dashboard_cdt.html.twig', [
             'chantiers' => $chantiers,
+            'prestataires' => $prestataires,
         ]);
+    }
 
+    /**
+     * @Route("/cdt/chantier/{id}/{search}", name="searchbyphase")
+     */
+    public function searchByPhase($id, $search): Response
+    {
+        $phases = $this->getDoctrine()
+            ->getManager()
+            ->createQuery("SELECT p FROM App:Phase p WHERE p.nom LIKE :search AND p.chantier = :id")
+            ->setParameters(array('search'=> $search, 'id' => $id))
+            ->getResult();
+
+
+        return $this->render('btp/cdt/consult_chantier.html.twig', [
+            'chantier' => null,
+            'phases' => $phases,
+        ]);
     }
 
 }
