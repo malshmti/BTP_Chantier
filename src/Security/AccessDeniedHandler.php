@@ -13,7 +13,7 @@ class AccessDeniedHandler extends AbstractController implements AccessDeniedHand
 {
     public function handle(Request $request, AccessDeniedException $accessDeniedException): ?Response
     {
-        return $this->redirectToRoute('app_login');
+        return $this->redirectToRoute('accessdenied');
 
     }
 

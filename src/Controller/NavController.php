@@ -61,25 +61,31 @@ class NavController extends AbstractController
      */
     public function dashboardPresta(): Response
     {
-        $repoTache = $this->getDoctrine()->getRepository(Tache::class);
+        $repoUser = $this->getDoctrine()->getRepository(User::class);
 
-        $taches = $repoTache->findAll();
+        /** @var Prestataire|null $user */
+        $user = $repoUser->findOneBy([
+            'email' => $this->getUser()->getUserIdentifier()
+        ]);
 
-        $tachesPlan = $this->getDoctrine()
+        $taches = $user->getTaches();
+
+        $tachesPlanifiees = $this->getDoctrine()
             ->getManager()
-            ->createQuery('SELECT t FROM App:Tache t WHERE t.dateDebut > CURRENT_DATE() AND t.dureeReelle IS NULL' )
+            ->createQuery('SELECT t FROM App:Tache t WHERE t.dateDebut > CURRENT_DATE() AND t.dureeReelle IS NULL AND t.prestataire = :id')
+            ->setParameter('id', $user->getId())
             ->getResult();
 
-        $tachesCours = $this->getDoctrine()
+        $tachesEnCours = $this->getDoctrine()
             ->getManager()
-            ->createQuery('SELECT t FROM App:Tache t WHERE t.dateDebut < CURRENT_DATE() AND t.dureeReelle IS NULL' )
+            ->createQuery('SELECT t FROM App:Tache t WHERE t.dateDebut < CURRENT_DATE() AND t.dureeReelle IS NULL AND t.prestataire = :id' )
+            ->setParameter('id', $user->getId())
             ->getResult();
-
 
         return $this->render('btp/presta/dashboard_presta.html.twig', [
             'taches' => $taches,
-            'tachesPlan' => $tachesPlan,
-            'tachesCours' => $tachesCours
+            'tachesPlan' => $tachesPlanifiees,
+            'tachesCours' => $tachesEnCours
         ]);
 
     }
@@ -180,6 +186,14 @@ class NavController extends AbstractController
         $repo->updateDureeReelle($tache);
 
         return $this->redirectToRoute('dashboard_prestataire');
+    }
+
+    /**
+     * @Route("/accessdenied", name="accessdenied")
+     */
+    public function accessDenied(): Response
+    {
+        return $this->render('accessdenied.html.twig');
     }
 
 

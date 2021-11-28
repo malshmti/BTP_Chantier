@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Prestataire;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -23,6 +24,12 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            if($form->get('typeActeur')->getData() == "Prestataire") {
+                $user = new Prestataire();
+                $form = $this->createForm(RegistrationFormType::class, $user);
+                $form->handleRequest($request);
+            }
+
             // encode the plain password
             $user->setPassword(
             $userPasswordHasherInterface->hashPassword(
