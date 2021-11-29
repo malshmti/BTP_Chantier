@@ -7,19 +7,20 @@
     <div class="dash">
 
         <div class="container dashBoardContain">
-            <div class="input-group">
-                <div class="form-outline">
-                    <input id="search-input" type="search" id="form1" class="form-control" />
-                    <label class="form-label" for="form1">Search</label>
-                </div>
-                <button id="search-button" type="button" class="btn btn-primary">
-                    oui
-                </button>
-            </div>
+
             <h1>Tableau de bord</h1>
             <hr>
             <h2>Chantiers</h2>
             <div class="row justify-content-between ">
+                <div style="margin-bottom: 5%" class="col-12 input-group">
+                    <div class="form-outline">
+                        <input id="search-input" type="search" class="form-control" placeholder="Rechercher un chantier..."/>
+                    </div>
+                    <button id="search-button" type="button" class="srch btn btn-primary">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </div>
+
                 {% if chantiers == null %}
                     <p>Aucun résultat</p>
                 {% endif %}

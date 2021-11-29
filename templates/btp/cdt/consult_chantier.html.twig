@@ -8,15 +8,6 @@
     {{ include('@EasyAdmin/crud/includes/_delete_form.html.twig', with_context = false) }}
 
     <button class="btn-retour btn btn-primary" type="button" onclick="history.go(-1)">< Retour</button>
-    <div class="input-group">
-        <div class="form-outline">
-            <input id="search-input" type="search" id="form1" class="form-control" />
-            <label class="form-label" for="form1">Search</label>
-        </div>
-        <button id="search-button" type="button" class="btn btn-primary">
-            oui
-        </button>
-    </div>
 
     <div class="container mb-5">
         <h1>{{ chantier.nom }}</h1>
@@ -26,6 +17,15 @@
         <div class="phases-chantier">
             <h2>Phases du chantier</h2>
             <div class="row">
+{#                <div  style="margin-bottom: 3%" class="col-12 input-group">#}
+{#                    <div class="form-outline">#}
+{#                        <input id="search-input" type="search" class="form-control" placeholder="Rechercher une phase..." />#}
+{#                    </div>#}
+{#                    <button id="search-button" type="button" class="srch btn btn-primary">#}
+{#                        <i class="fa fa-search"></i>#}
+{#                    </button>#}
+{#                </div>#}
+
                 {% for phase in phases %}
 
                     <div class="col-4" >

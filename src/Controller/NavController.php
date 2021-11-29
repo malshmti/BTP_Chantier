@@ -51,10 +51,26 @@ class NavController extends AbstractController
 
         $prestataires = $repoPresta->findAll();
 
+//        $tachesTotales = $this->getDoctrine()
+//            ->getManager()
+//            ->createQuery('SELECT COUNT(t) FROM App:Tache t WHERE t.dateDebut > CURRENT_DATE() AND t.dureeReelle IS NULL AND t.phase =(SELECT p FROM App:Phase p WHERE p.chantier =:id)')
+//            ->setParameter('id', $user->getId())
+//            ->getResult();
+//
+//
+//        $tachesTerminees = $this->getDoctrine()
+//            ->getManager()
+//            ->createQuery('SELECT COUNT(t) FROM App:Tache t WHERE t.phase = (SELECT p FROM App:Phase p WHERE p.chantier =:id)')
+//            ->setParameter('id', $user->getId())
+//            ->getResult();
+//
+//        $progression = $tachesTerminees / $tachesTotales;
 
         return $this->render('btp/cdt/dashboard_cdt.html.twig', [
             'chantiers' => $chantiers,
             'prestataires' => $prestataires,
+//            'progression' => $progression
+
         ]);
     }
 
