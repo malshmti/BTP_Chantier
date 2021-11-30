@@ -35,7 +35,7 @@ class Phase implements \JsonSerializable
     private $taches;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Chantier::class)
+     * @ORM\ManyToOne(targetEntity=Chantier::class, inversedBy="phases")
      */
     private $chantier;
 

@@ -40,7 +40,7 @@ class Chantier implements \JsonSerializable
     private $localisation;
 
     /**
-     * @ORM\ManyToMany(targetEntity=User::class, mappedBy="chantier")
+     * @ORM\ManyToMany(targetEntity=User::class, mappedBy="chantiers")
      */
     private $users;
 
@@ -144,6 +144,17 @@ class Chantier implements \JsonSerializable
     {
         return $this->users;
     }
+
+    /**
+     * @return User
+     */
+    public function getUser(int $id): User
+    {
+        return $this->users->filter(function($user) use ($id) {
+            return $user->getId() == $id;
+        })->first();
+    }
+
 
     public function addUser(User $user): self
     {
