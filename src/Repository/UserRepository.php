@@ -60,6 +60,29 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->_em->flush();
     }
 
+    public function getTaskDone($user){
+
+        $tachesTotales = $this->getDoctrine()
+            ->getManager()
+            ->createQuery('SELECT COUNT(t) FROM App:Tache t WHERE t.dateDebut > CURRENT_DATE() AND t.dureeReelle IS NULL AND t.user = :id')
+            ->setParameter('id', $user->getId())
+            ->getResult();
+
+        return $tachesTotales;
+
+    }
+
+    public function getTaskPlanned($user){
+
+        $tachesTerminees = $this->getDoctrine()
+            ->getManager()
+            ->createQuery('SELECT COUNT(t) FROM App:Tache t WHERE t.dureeReelle IS NOT NULL AND t.user = :id')
+            ->setParameter('id', $user->getId())
+            ->getResult();
+
+    }
+
+
     // /**
     //  * @return User[] Returns an array of User objects
     //  */

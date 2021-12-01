@@ -47,6 +47,10 @@ class NavController extends AbstractController
             'email' => $this->getUser()->getUserIdentifier()
         ]);
 
+//        $tachesFaites = $repoUser->findBy()etTaskDone($user);
+//
+//        $tachesPlan = $repoUser->getTaskPlanned($user);
+
         $chantiers = $user->getChantiers();
 
         $prestataires = $repoPresta->findAll();
@@ -69,6 +73,8 @@ class NavController extends AbstractController
         return $this->render('btp/cdt/dashboard_cdt.html.twig', [
             'chantiers' => $chantiers,
             'prestataires' => $prestataires,
+//            'tachesPlan' => $tachesPlan,
+//            'tachesFaites' => $tachesFaites
 //            'progression' => $progression
 
         ]);
